@@ -90,6 +90,89 @@ No additional configurations are necessary.
 
 [Sakura](https://github.com/dabisu/sakura) will used with `scrollbar=true` enabled in `sakura.conf`. This terminal emulator feels the cleanest with keeping all the most necessary features without intruding on my workflow. Specifically, having the special features hidden in just one right click away feels intuitive as someone might need them quickly from time to time but for the most part just wants to use the console. 
 
+## Text Editor
+
+For basic text editing, [mousepad](https://github.com/xfce-mirror/mousepad) can do the job. The configuration should match the following `gsettings list-recursively org.xfce.mousepad` preferences:
+
+```bash
+org.xfce.mousepad.preferences.file add-last-end-of-line false
+org.xfce.mousepad.preferences.file auto-reload false
+org.xfce.mousepad.preferences.file autosave-timer uint32 30
+org.xfce.mousepad.preferences.file default-encoding 'UTF-8'
+org.xfce.mousepad.preferences.file make-backup false
+org.xfce.mousepad.preferences.file monitor-changes true
+org.xfce.mousepad.preferences.file monitor-disabling-timer uint32 500
+org.xfce.mousepad.preferences.file session-restore 'after-a-crash'
+org.xfce.mousepad.preferences.view auto-indent false
+org.xfce.mousepad.preferences.view color-scheme 'oblivion'
+org.xfce.mousepad.preferences.view font-name 'Monospace 10'
+org.xfce.mousepad.preferences.view highlight-current-line true
+org.xfce.mousepad.preferences.view indent-on-tab true
+org.xfce.mousepad.preferences.view indent-width -1
+org.xfce.mousepad.preferences.view insert-spaces false
+org.xfce.mousepad.preferences.view match-braces false
+org.xfce.mousepad.preferences.view right-margin-position uint32 80
+org.xfce.mousepad.preferences.view show-line-endings true
+org.xfce.mousepad.preferences.view show-line-marks false
+org.xfce.mousepad.preferences.view show-line-numbers true
+org.xfce.mousepad.preferences.view show-right-margin false
+org.xfce.mousepad.preferences.view show-whitespace false
+org.xfce.mousepad.preferences.view smart-backspace false
+org.xfce.mousepad.preferences.view smart-home-end 'disabled'
+org.xfce.mousepad.preferences.view tab-width uint32 8
+org.xfce.mousepad.preferences.view use-default-monospace-font true
+org.xfce.mousepad.preferences.view word-wrap true
+org.xfce.mousepad.preferences.view.show-whitespace inside true
+org.xfce.mousepad.preferences.view.show-whitespace leading true
+org.xfce.mousepad.preferences.view.show-whitespace trailing true
+org.xfce.mousepad.preferences.window always-show-tabs false
+org.xfce.mousepad.preferences.window client-side-decorations false
+org.xfce.mousepad.preferences.window cycle-tabs false
+org.xfce.mousepad.preferences.window default-tab-sizes '2,3,4,8'
+org.xfce.mousepad.preferences.window expand-tabs true
+org.xfce.mousepad.preferences.window menubar-visible true
+org.xfce.mousepad.preferences.window menubar-visible-in-fullscreen 'auto'
+org.xfce.mousepad.preferences.window old-style-menu true
+org.xfce.mousepad.preferences.window opening-mode 'tab'
+org.xfce.mousepad.preferences.window path-in-title true
+org.xfce.mousepad.preferences.window recent-menu-items uint32 10
+org.xfce.mousepad.preferences.window remember-position false
+org.xfce.mousepad.preferences.window remember-size true
+org.xfce.mousepad.preferences.window remember-state true
+org.xfce.mousepad.preferences.window statusbar-visible false
+org.xfce.mousepad.preferences.window statusbar-visible-in-fullscreen 'auto'
+org.xfce.mousepad.preferences.window toolbar-icon-size 'small-toolbar'
+org.xfce.mousepad.preferences.window toolbar-style 'icons'
+org.xfce.mousepad.preferences.window toolbar-visible false
+org.xfce.mousepad.preferences.window toolbar-visible-in-fullscreen 'auto'
+org.xfce.mousepad.state.application enabled-plugins @as []
+org.xfce.mousepad.state.application session ['1;;+']
+org.xfce.mousepad.state.search direction uint32 1
+org.xfce.mousepad.state.search enable-regex false
+org.xfce.mousepad.state.search highlight-all false
+org.xfce.mousepad.state.search history-size uint32 20
+org.xfce.mousepad.state.search incremental false
+org.xfce.mousepad.state.search match-case false
+org.xfce.mousepad.state.search match-whole-word false
+org.xfce.mousepad.state.search replace-all false
+org.xfce.mousepad.state.search replace-all-location uint32 1
+org.xfce.mousepad.state.search replace-history @as []
+org.xfce.mousepad.state.search search-history []
+org.xfce.mousepad.state.search wrap-around true
+org.xfce.mousepad.state.window fullscreen false
+org.xfce.mousepad.state.window height uint32 634
+org.xfce.mousepad.state.window left uint32 0
+org.xfce.mousepad.state.window maximized false
+org.xfce.mousepad.state.window top uint32 0
+org.xfce.mousepad.state.window width uint32 1393
+```
+
+A simple solution to set these preferences is by running `gsettings set` for each preference line.
+
+For note taking and general document processing work, [LibreOffice](https://www.libreoffice.org/) should be setup with ZorinOS's special icons.
+
+[comment - Make an explicit reference to the ZorinOS Theming section in the future]: #
+
 ## Video Player
 
 [mpv](https://mpv.io/) is used because it supposedly less bloated than VLC, is popular enough for wide support, and is what I am familiar with.

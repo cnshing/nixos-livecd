@@ -10,6 +10,10 @@ Managing and integrating these AppImages into the desktop environment will be up
 
 It should be trivial to make a nixOS equivalent package of any AppImages via [appimageTools](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-appimageTools). The only problem is that the cost of maintaining each AppImage grows faster than the benefit of integrating each one, resulting in a large increase of complexity. Our AppImageLauncher method on the other hand only requires you to place the AppImage under the directory and periodically open the tool to integrate the AppImages.
 
+## Audio Effects
+
+Ideally, there should be an application that automatically applies an [AutoEQ](https://autoeq.app/) filter for whatever audio device you happen to listen on. Since there isn't any such application yet, [EasyEffects](https://github.com/wwmm/easyeffects) should be already installed so that the user can at least quickly import an impulse response.
+
 ## Battery Management
 
 [TLP](https://github.com/linrunner/TLP) will be used to optimize battery with performance. Preferentially, any laptop devices should use full computing power when charging and switch to power-saving mode within `0%` - `40%` battery thresholds.

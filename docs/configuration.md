@@ -90,6 +90,23 @@ No additional configurations are necessary.
 
 [NetworkManager](https://networkmanager.dev/) is sufficient for Internet with ease of use and GNOME integration. 
 
+## Remote Desktop
+
+Having popular remote desktop software pre-packaged into the liveCD can be helpful in situations where there are restricted physical capabilities such as limited keyboard or display options. In those cases, doing the bare physical minimum to boot up the live image and transitioning to remote access as soon as possible is ideal. 
+
+### Parsec
+
+While [Parsec](parsec.app) unfortunately, does not currently support Linux hosting, I do occasionally use Parsec to remote into some of my other machines. The app should "just work", with no artificial barrier of access other than standard authentication.
+
+### Rustdesk
+
+[Rustdesk](https://rustdesk.com/) should be automatically running on boot with a custom static password configuration and LAN direct IP access enabled. The configuration file itself should be located at the root directory of the liveCD medium. If this configuration is not available however, Rustdesk should then revert to it's default settings. 
+
+> [!WARNING]\
+> :warning: This process of automatically exposing unattended access to a network is essentially a backdoor. Do not attempt to set a known and public Rustdesk password!
+
+
+
 ## Terminal
 
 [Sakura](https://github.com/dabisu/sakura) will used with `scrollbar=true` enabled in `sakura.conf`. This terminal emulator feels the cleanest with keeping all the most necessary features without intruding on my workflow. Specifically, having the special features hidden in just one right click away feels intuitive as someone might need them quickly from time to time but for the most part just wants to use the console. 

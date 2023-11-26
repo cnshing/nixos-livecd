@@ -90,6 +90,18 @@ No additional configurations are necessary.
 
 [NetworkManager](https://networkmanager.dev/) is sufficient for Internet with ease of use and GNOME integration. 
 
+## Mail Client
+
+Each mail service should be accompanied by corresponding web-app based client. In practice, these web-app implementations are often based off Electron.
+
+The reasons in favor for web-app mail over a traditional native mail client are as follows:
+
+* Native mail authentication varies in difficulty or success of operation. In other words, a lot of mail client authentication is simply not reliable, while web-app authentication follows the mail service's standard authentication flow 1-to-1.
+* In my opinion, the default web-app provides a more familiar UI/UX experience for the average person with an significantly lower learning curve.
+* Web-app based mail clients can be as bloated but no more than accessing the same page on a web browser, while native clients can vary wildly in resource usage depending on the client of choice. 
+
+Personally, I primarily use [ElectronMail](https://github.com/vladimiry/ElectronMail) to access ProtonMail. 
+
 ## Remote Desktop
 
 Having popular remote desktop software pre-packaged into the liveCD can be helpful in situations where there are restricted physical capabilities such as limited keyboard or display options. In those cases, doing the bare physical minimum to boot up the live image and transitioning to remote access as soon as possible is ideal. 
@@ -104,7 +116,6 @@ While [Parsec](parsec.app) unfortunately, does not currently support Linux hosti
 
 > [!WARNING]\
 > :warning: This process of automatically exposing unattended access to a network is essentially a backdoor. Do not attempt to set a known and public Rustdesk password!
-
 
 
 ## Terminal

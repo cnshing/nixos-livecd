@@ -42,6 +42,10 @@ These features can be excellent for power users and thankfully can also be hidde
 
 For the most part, GNOME with extensions allows me to replicate the majority of the good parts of the Windows experience for comfort sake. There are also a couple of nicely integrated features as a result of GNOME's large popularity, making GNOME an overall better choice even at the cost of a heavier system. 
 
+### Window Tiling
+
+Applications should be able to be tiled to the top, bottom, left, and right halves of the screen identically to Window snap tiles via [WinTile](https://extensions.gnome.org/extension/1723/wintile-windows-10-window-tiling-for-gnome/).
+
 ## File Manager
 
 There are some instances with GTK File Picker where it is hard coded such that only Gnome's [Nautilus](https://github.com/GNOME/nautilus) file manager can be opened, regardless of any other default file manager in the system. To remedy this there will be a primary file manager, [Thunar](https://gitlab.xfce.org/xfce/thunar), for daily use and a secondary file manager used for any situation where the primary file manager cannot be used. 

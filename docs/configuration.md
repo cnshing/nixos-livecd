@@ -42,6 +42,12 @@ These features can be excellent for power users and thankfully can also be hidde
 
 For the most part, GNOME with extensions allows me to replicate the majority of the good parts of the Windows experience for comfort sake. There are also a couple of nicely integrated features as a result of GNOME's large popularity, making GNOME an overall better choice even at the cost of a heavier system. 
 
+### Theming
+
+Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks). Then install the ZorinOS [desktop](https://github.com/ZorinOS/zorin-desktop-themes), [icon](https://github.com/ZorinOS/zorin-icon-themes), and special LibreOffice themes.
+
+[comment - Updating the Theming section to show the correct settings via gsettings]: #
+
 ### Window Tiling
 
 Applications should be able to be tiled to the top, bottom, left, and right halves of the screen identically to Window snap tiles via [WinTile](https://extensions.gnome.org/extension/1723/wintile-windows-10-window-tiling-for-gnome/).

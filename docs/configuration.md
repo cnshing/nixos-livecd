@@ -44,7 +44,7 @@ For the most part, GNOME with extensions allows me to replicate the majority of 
 
 ### Theming
 
-Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks). Then install the ZorinOS [desktop](https://github.com/ZorinOS/zorin-desktop-themes), [icon](https://github.com/ZorinOS/zorin-icon-themes), and special LibreOffice themes.
+Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks). Then install the ZorinOS [desktop](https://github.com/ZorinOS/zorin-desktop-themes), [icon](https://github.com/ZorinOS/zorin-icon-themes), and special LibreOffice themes. Most of the liveCD look-and-feel should come from [ZorinOS](https://zorin.com/os/), because their theming feels visually spectacular to me.
 
 [comment - Updating the Theming section to show the correct settings via gsettings]: #
 

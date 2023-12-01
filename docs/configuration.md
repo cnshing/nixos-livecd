@@ -227,9 +227,7 @@ org.xfce.mousepad.state.window width uint32 1393
 
 A simple solution to set these preferences is by running `gsettings set` for each preference line.
 
-For note taking and general document processing work, [LibreOffice](https://www.libreoffice.org/) should be setup with ZorinOS's special icons.
-
-[comment - Make an explicit reference to the ZorinOS Theming section in the future]: #
+For note taking and general document processing work, [LibreOffice](https://www.libreoffice.org/) should be setup with ZorinOS's [special](#theming) icons.
 
 ## Video Player
 

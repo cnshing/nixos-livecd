@@ -52,6 +52,12 @@ Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.o
 
 [comment - Updating the Theming section to show the correct settings via gsettings]: #
 
+### Tweaks
+
+`gnome-shell-extension-prefs` should be installed to allow the user to enable or disable extensions during normal usage.
+
+Additionally, the "Window is ready" popup whenever any application opens should be disabled. Extensions accomplishing this are usually initially  developed and created only to be subsequently unmaintained with each new GNOME version, but the current extension I use for my system is [NoAnnoyance V2](https://extensions.gnome.org/extension/2182/noannoyance/).
+
 ### Window Tiling
 
 Applications should be able to be tiled to the top, bottom, left, and right halves of the screen identically to Window snap tiles via [WinTile](https://extensions.gnome.org/extension/1723/wintile-windows-10-window-tiling-for-gnome/).

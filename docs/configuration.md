@@ -42,6 +42,10 @@ These features can be excellent for power users and thankfully can also be hidde
 
 For the most part, GNOME with extensions allows me to replicate the majority of the good parts of the Windows experience for comfort sake. There are also a couple of nicely integrated features as a result of GNOME's large popularity, making GNOME an overall better choice even at the cost of a heavier system. 
 
+### Phone Sync
+
+With [GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/), a GNOME [KDEConnect](https://kdeconnect.kde.org/) implementation, installed and automatically enabled, users can pair and sync communications with the liveCD.
+
 ### Theming
 
 Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks). Then install the ZorinOS [desktop](https://github.com/ZorinOS/zorin-desktop-themes), [icon](https://github.com/ZorinOS/zorin-icon-themes), and special LibreOffice themes. Most of the liveCD look-and-feel should come from [ZorinOS](https://zorin.com/os/), because their theming feels visually spectacular to me.

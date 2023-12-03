@@ -56,7 +56,9 @@ Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.o
 
 `gnome-shell-extension-prefs` should be installed to allow the user to enable or disable extensions during normal usage.
 
-Additionally, the "Window is ready" popup whenever any application opens should be disabled. Extensions accomplishing this are usually initially  developed and created only to be subsequently unmaintained with each new GNOME version, but the current extension I use for my system is [NoAnnoyance V2](https://extensions.gnome.org/extension/2182/noannoyance/).
+Additionally, the "Window is ready" popup whenever any application opens should be disabled. Extensions accomplishing this are usually initially developed and created only to be subsequently unmaintained with each new GNOME version. The current extension for GNOME 45 would be [NoAnnoyance](https://extensions.gnome.org/extension/6109/noannoyance-fork/).
+
+[comment - Always update this section's current working extension for "Window is ready" for the liveCD's current version]: #
 
 ### Window Tiling
 

@@ -54,11 +54,94 @@ The desktop shell should traditionally include a [start menu](https://extensions
 
 Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks). Then install the ZorinOS [desktop](https://github.com/ZorinOS/zorin-desktop-themes), [icon](https://github.com/ZorinOS/zorin-icon-themes), and special LibreOffice themes. Most of the liveCD look-and-feel should come from [ZorinOS](https://zorin.com/os/), because their theming feels visually spectacular to me.
 
-[comment - Updating the Theming section to show the correct settings via gsettings]: #
+[comment - Update the desktop background picture-uri once a path of known background images are found]: #
 
 ### Tweaks
 
-`gnome-shell-extension-prefs` should be installed to allow the user to enable or disable extensions during normal usage.
+`gnome-shell-extension-prefs` should be installed to allow the user to enable or disable extensions during normal usage. Use the following gsetting configuration:
+
+```bash
+gsettings set org.gnome.shell.extensions.user-theme name 'ZorinGrey-Dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+gsettings set org.gnome.desktop.interface icon-theme 'ZorinGrey-Dark'
+gsettings set org.gnome.desktop.sound theme-name 'freedesktop'
+gsettings set org.gnome.desktop.interface gtk-theme 'ZorinGrey-Dark'
+gsettings set org.gnome.desktop.background picture-options 'zoom'
+gsettings set org.gnome.desktop.background picture-uri ''
+gsettings set org.gnome.desktop.interface font-name 'Inter 10'
+gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrains Mono 10'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Inter Bold 10'
+gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
+gsettings set org.gnome.desktop.interface font-hinting 'medium'
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
+gsettings set org.gnome.desktop.input-sources show-all-sources false
+gsettings set org.gnome.desktop.interface gtk-key-theme 'Default'
+gsettings set org.gnome.mutter overlay-key 'Super_L'
+gsettings set org.gnome.desktop.interface locate-pointer false
+gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+gsettings set org.gnome.desktop.peripherals.touchpad disable-while-typing true
+gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'
+gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'default'
+gsettings set org.gnome.desktop.interface clock-show-weekday true
+gsettings set org.gnome.desktop.interface clock-show-date true
+gsettings set org.gnome.desktop.interface clock-show-seconds true
+gsettings set org.gnome.desktop.calendar show-weekdate false
+gsettings set org.gnome.desktop.wm.preferences action-double-click-titlebar 'toggle-maximize'
+gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'none'
+gsettings set org.gnome.desktop.wm.preferences action-right-click-titlebar 'menu'
+gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+gsettings set org.gnome.mutter attach-modal-dialogs true
+gsettings set org.gnome.mutter center-new-windows false
+gsettings set org.gnome.desktop.wm.preferences resize-with-right-button false
+gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Super>'
+gsettings set org.gnome.desktop.wm.preferences focus-mode 'click'
+gsettings set org.gnome.desktop.wm.preferences auto-raise false
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent false
+```
+
+For reference, here is each command with it's corresponding GUI Location:
+| Command                                                                                          | Location                                                 |
+|--------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `gsettings set org.gnome.shell.extensions.user-theme name 'ZorinGrey-Dark'`                      | Appearance -> Themes -> Shell                            |
+| `gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'`                               | Appearance -> Themes -> Cursor                           |
+| `gsettings set org.gnome.desktop.interface icon-theme 'ZorinGrey-Dark'`                          | Appearance -> Themes -> Icons                            |
+| `gsettings set org.gnome.desktop.sound theme-name 'freedesktop'`                                 | Appearance -> Themes -> Alert Sound                      |
+| `gsettings set org.gnome.desktop.interface gtk-theme 'ZorinGrey-Dark'`                           | Appearance -> Themes -> Legacy Applications              |
+| `gsettings set org.gnome.desktop.background picture-options 'zoom'`                              | Appearance -> Background -> Adjustment                   |
+| `gsettings set org.gnome.desktop.background picture-uri ''`                                      | Appearance -> Background -> Image                        |
+| `gsettings set org.gnome.desktop.interface font-name 'Inter 10'`                                 | Fonts -> Interface Text                                  |
+| `gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'`                         | Fonts -> Document Text                                   |
+| `gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrains Mono 10'`              | Fonts -> Monospace Text                                  |
+| `gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Inter Bold 10'`                   | Fonts -> Legacy Window Titles                            |
+| `gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'`                             | Fonts -> Antialiasing                                    |
+| `gsettings set org.gnome.desktop.interface font-hinting 'medium'`                                | Fonts -> Hinting                                         |
+| `gsettings set org.gnome.desktop.interface text-scaling-factor 1.0`                              | Fonts -> Scaling Factor                                  |
+| `gsettings set org.gnome.desktop.input-sources show-all-sources false`                           | Keyboard & Mouse -> Keyboard -> Show All Input Sources   |
+| `gsettings set org.gnome.desktop.interface gtk-key-theme 'Default'`                              | Keyboard & Mouse -> Keyboard -> Emacs Input              |
+| `gsettings set org.gnome.mutter overlay-key 'Super_L'`                                           | Keyboard & Mouse -> Keyboard -> Overview Shortcuts       |
+| `gsettings set org.gnome.desktop.interface locate-pointer false`                                 | Keyboard & Mouse -> Mouse -> Pointer Location            |
+| `gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true`                        | Keyboard & Mouse -> Mouse -> Middle Click Paste          |
+| `gsettings set org.gnome.desktop.peripherals.touchpad disable-while-typing true`                 | Keyboard & Mouse -> Touchpad -> Disable While Typing     |
+| `gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'`                    | Keyboard & Mouse -> Mouse Click Emulation                |
+| `gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'default'`                      | Keyboard & Mouse -> Mouse -> Acceleration Profile        |
+| `gsettings set org.gnome.desktop.interface clock-show-weekday true`                              | Top Bar -> Clock -> Weekday                              |
+| `gsettings set org.gnome.desktop.interface clock-show-date true`                                 | Top Bar -> Clock -> Date                                 |
+| `gsettings set org.gnome.desktop.interface clock-show-seconds true`                              | Top Bar -> Clock -> Seconds                              |
+| `gsettings set org.gnome.desktop.calendar show-weekdate false`                                   | Top Bar -> Calendar -> Week Numbers                      |
+| `gsettings set org.gnome.desktop.wm.preferences action-double-click-titlebar 'toggle-maximize'`  | Windows Titlebars -> Titlebar Actions -> Double-click    |
+| `gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'none'`             | Windows Titlebars -> Titlebar Actions -> Middle-click    |
+| `gsettings set org.gnome.desktop.wm.preferences action-right-click-titlebar 'menu'`              | Windows Titlebars -> Titlebar Actions -> Secondary-Click |
+| `gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'` | Windows Titlebars -> Titlebar Buttons                    |
+| `gsettings set org.gnome.mutter attach-modal-dialogs true`                                       | Windows -> Attach Modal Dialogs                          |
+| `gsettings set org.gnome.mutter center-new-windows false`                                        | Windows -> Center New Windows                            |
+| `gsettings set org.gnome.desktop.wm.preferences resize-with-right-button false`                  | Windows -> Resize with Secondary-Click                   |
+| `gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Super>'`                 | Windows -> Windows Action Key                            |
+| `gsettings set org.gnome.desktop.wm.preferences focus-mode 'click'`                              | Windows -> Windows Focus                                 |
+| `gsettings set org.gnome.desktop.wm.preferences auto-raise false`                                | Windows -> Windows Focus -> Raise Windows When Focused   |
+| `gsettings set org.gnome.desktop.sound allow-volume-above-100-percent false`                     | General -> Over-Amplification                            |
+
+
 
 Additionally, the "Window is ready" popup whenever any application opens should be disabled. Extensions accomplishing this are usually initially developed and created only to be subsequently unmaintained with each new GNOME version. The current extension for GNOME 45 would be [NoAnnoyance](https://extensions.gnome.org/extension/6109/noannoyance-fork/).
 

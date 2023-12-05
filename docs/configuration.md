@@ -48,7 +48,7 @@ Content based files should always have a preview thumbnail. NixOS should automat
 
 ### Tweaks
 
-`gnome-shell-extension-prefs` should be installed to allow the user to enable or disable extensions during normal usage. Use the following gsetting configuration from the following [settings](settings.md#tweaks).
+`gnome-shell-extension-prefs` should be installed with these gsettings [configuration](settings.md#tweaks).
 
 Additionally, the "Window is ready" popup whenever any application opens should be disabled. Extensions accomplishing this are usually initially developed and created only to be subsequently unmaintained with each new GNOME version. The current extension for GNOME 45 would be [NoAnnoyance](https://extensions.gnome.org/extension/6109/noannoyance-fork/).
 

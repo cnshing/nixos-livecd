@@ -30,6 +30,10 @@ For the most part, GNOME with extensions allows me to replicate the majority of 
 
 Most of the liveCD look-and-feel should come from [ZorinOS](https://zorin.com/os/), because their theming feels visually spectacular to me.
 
+### Tweaks
+
+Installing `gnome-shell-extension-prefs` allows the user to enable or disable extensions during normal usage.
+
 ## File Manager
 
 With GNOME 45's recent UX [changes](https://9to5linux.com/gnome-45s-nautilus-file-manager-gets-a-modern-full-height-sidebar-layout) to Nautilus, I am seriously considering switching to it once GNOME 45 hits stable release.

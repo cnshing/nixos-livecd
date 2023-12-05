@@ -1,14 +1,12 @@
 # Configuration
 
-The following document describes all the relevant configuration, preferences, and look-and-feel of the LiveCD.
+The following document describes all the high level configurations of the liveCD.
 
 ## AppImages
 
 AppImages will replace packages not available in nixOS in the `$HOME/AppImages` directory.
 
 Managing and integrating these AppImages into the desktop environment will be up to [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) Lite, where it will be configured to look for `$HOME/AppImages`. The AppImageLauncher AppImage wil also be placed in the same directory.
-
-It should be trivial to make a nixOS equivalent package of any AppImages via [appimageTools](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-appimageTools). The only problem is that the cost of maintaining each AppImage grows faster than the benefit of integrating each one, resulting in a large increase of complexity. Our AppImageLauncher method on the other hand only requires you to place the AppImage under the directory and periodically open the tool to integrate the AppImages.
 
 ## Audio Effects
 
@@ -24,24 +22,12 @@ If possible, there should be a separate boot entry from the standard one that ex
 
 ## Display Manager
 
-In my opinion the only  real choices are [LightDM](https://github.com/canonical/lightdm) because of their modern support and theme customizability. While [GDM](https://github.com/GNOME/gdm) also has these characteristics, I anecdotally never actually had to manually login with a DM for more than twice in a month, which makes a more resource draining GDM costly. Plus, theming tools like [Nody Greeter](https://github.com/JezerM/nody-greeter) allow LightDM to have a nice UI experience even without GNOME integrations.
+[LighDM](https://github.com/canonical/lightdm) will be the display manager using the default GTK [theme](#theming).
 
 ## Desktop Environment
 
-I would have picked KDE in the past because of it's ability to offer superb customization and decent look-and-feel at a significantly lightweight performance point. Additionally, [GNOME](https://www.gnome.org/)'s default app drawer design was something that can work fabulously for touch based devices, but was I believe to be inappropriate for mouse and keyboard desktop use cases. 
-
-However while I felt KDE offered exactly what I need in terms of functionality, it overall lacks UX polish which GNOME particularly excels at. For example, consider KDE's file manager Dolphin.
-
-![Dolphin File Manager](https://cdn.kde.org/screenshots/dolphin/dolphin.png)
-
-As you can see, the top bar gives conveniently access to everything you need, from being able to quickly "split" tabs, opening the terminal from a button, and even accessing different levels of the current directory hierarchy just by clicking on each folder name on the path bar. Even some of the other visually unintuitive icons will start to make sense once you try it out and understand what the function does.
-
-But look at the sidebar and how all the elements look ridiculously small compared to other elements. I shouldn't require the mouse precision skills of an OSU expert to properly click the right side bar item. Worst of all, there appears to be not one, but *two* equally prominently displayed separate search areas!
-
-These features can be excellent for power users and thankfully can also be hidden away via KDE's customize options. However, the lack of UX polish makes KDE a unlikely environment for the less tech-savvy to intuitively use.
-
-For the most part, GNOME with extensions allows me to replicate the majority of the good parts of the Windows experience for comfort sake. There are also a couple of nicely integrated features as a result of GNOME's large popularity, making GNOME an overall better choice even at the cost of a heavier system. 
-
+[GNOME](https://www.gnome.org/) will be our desktop environment with extensions to support the below functionalities:
+ 
 ### Phone Sync
 
 With [GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/), a GNOME [KDEConnect](https://kdeconnect.kde.org/) implementation, installed and automatically enabled, users can pair and sync communications with the liveCD.
@@ -52,7 +38,7 @@ The desktop shell should traditionally include a [start menu](https://extensions
 
 ### Theming
 
-Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks). Then install the ZorinOS [desktop](https://github.com/ZorinOS/zorin-desktop-themes), [icon](https://github.com/ZorinOS/zorin-icon-themes), and special LibreOffice themes. Most of the liveCD look-and-feel should come from [ZorinOS](https://zorin.com/os/), because their theming feels visually spectacular to me.
+Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks). Then install the ZorinOS [desktop](https://github.com/ZorinOS/zorin-desktop-themes), [icon](https://github.com/ZorinOS/zorin-icon-themes), and special LibreOffice themes. Most of the liveCD look-and-feel should come from [ZorinOS](https://zorin.com/os/).
 
 [comment - Update the desktop background picture-uri once a path of known background images are found]: #
 
@@ -159,8 +145,6 @@ Applications should be able to be tiled to the top, bottom, left, and right halv
 
 There are some instances with GTK File Picker where it is hard coded such that only Gnome's [Nautilus](https://github.com/GNOME/nautilus) file manager can be opened, regardless of any other default file manager in the system. To remedy this there will be a primary file manager, [Thunar](https://gitlab.xfce.org/xfce/thunar), for daily use and a secondary file manager used for any situation where the primary file manager cannot be used. 
 
-With GNOME 45's recent UX [changes](https://9to5linux.com/gnome-45s-nautilus-file-manager-gets-a-modern-full-height-sidebar-layout) to Nautilus, I am seriously considering switching to it once GNOME 45 hits stable release.
-
 [comment - Make an explicit reference to the GNOME section in the future]: #
 
 ### Thunar
@@ -223,21 +207,13 @@ No additional configurations are necessary.
 
 Each mail service should be accompanied by corresponding web-app based client. In practice, these web-app implementations are often based off Electron.
 
-The reasons in favor for web-app mail over a traditional native mail client are as follows:
-
-* Native mail authentication varies in difficulty or success of operation. In other words, a lot of mail client authentication is simply not reliable, while web-app authentication follows the mail service's standard authentication flow 1-to-1.
-* In my opinion, the default web-app provides a more familiar UI/UX experience for the average person with an significantly lower learning curve.
-* Web-app based mail clients can be as bloated but no more than accessing the same page on a web browser, while native clients can vary wildly in resource usage depending on the client of choice. 
-
-Personally, I primarily use [ElectronMail](https://github.com/vladimiry/ElectronMail) to access ProtonMail. 
-
 ## Remote Desktop
 
-Having popular remote desktop software pre-packaged into the liveCD can be helpful in situations where there are restricted physical capabilities such as limited keyboard or display options. In those cases, doing the bare physical minimum to boot up the live image and transitioning to remote access as soon as possible is ideal. 
+[Parsec](https://parsec.app) and [Rustdesk](https://rustdesk.com/) should be in the liveCD.
 
 ### Parsec
 
-While [Parsec](parsec.app) unfortunately, does not currently support Linux hosting, I do occasionally use Parsec to remote into some of my other machines. The app should "just work", with no artificial barrier of access other than standard authentication.
+The app should "just work", with no artificial barrier of access other than standard authentication.
 
 ### Rustdesk
 
@@ -249,7 +225,7 @@ While [Parsec](parsec.app) unfortunately, does not currently support Linux hosti
 
 ## Terminal
 
-[Sakura](https://github.com/dabisu/sakura) will used with `scrollbar=true` enabled in `sakura.conf`. This terminal emulator feels the cleanest with keeping all the most necessary features without intruding on my workflow. Specifically, having the special features hidden in just one right click away feels intuitive as someone might need them quickly from time to time but for the most part just wants to use the console. 
+[Sakura](https://github.com/dabisu/sakura) will used with `scrollbar=true` enabled in `sakura.conf`. 
 
 ## Text Editor
 
@@ -334,4 +310,4 @@ For note taking and general document processing work, [LibreOffice](https://www.
 
 ## Video Player
 
-[mpv](https://mpv.io/) is used because it supposedly less bloated than VLC, is popular enough for wide support, and is what I am familiar with.
+[mpv](https://mpv.io/) shall be used as the default video player.

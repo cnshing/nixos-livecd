@@ -56,6 +56,10 @@ Enable the User Themes GNOME extension and [gnome-tweaks](https://gitlab.gnome.o
 
 [comment - Update the desktop background picture-uri once a path of known background images are found]: #
 
+### Thumbnailers
+
+Content based files should always have a preview thumbnail. NixOS should automatically provide thumbnail functionality built into GNOME, but some [issues](https://github.com/NixOS/nixpkgs/issues/200714) may or may not preside.
+
 ### Tweaks
 
 `gnome-shell-extension-prefs` should be installed to allow the user to enable or disable extensions during normal usage. Use the following gsetting configuration:

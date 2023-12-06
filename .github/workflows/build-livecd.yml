@@ -39,10 +39,9 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Save and Build NixOS Image
-        run:  echo "IMAGE_PATH=$(nixos-generate -f proxmox-lxc -c configuration.nix)" >> $GITHUB_OUTPUT
-        id: build
+        run:  echo "IMAGE_PATH=$(nixos-generate -f proxmox-lxc -c configuration.nix -o )" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         with:
           name: livecd-proxmox-lxc
-          path: ${{ steps.build.IMAGE_PATH }}
+          path: ${{ env.IMAGE_PATH }}

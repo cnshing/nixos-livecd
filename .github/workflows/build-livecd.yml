@@ -43,5 +43,4 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: livecd-proxmox-lxc
           path: ${{ env.IMAGE_PATH }}

@@ -1,0 +1,72 @@
+name: 'generate-nixos-image'
+description: 'Builds a nixOS image'
+inputs:
+  configuration:  
+    description: 'The path or filename of the nix configuration describing the image'
+    required: true
+    default: 'configuration.nix'
+  format:
+    description: 'The nixOS image format'
+    options:
+        - info
+        - warning
+        - debug
+        - amazon
+        - azure
+        - cloudstack
+        - do
+        - docker
+        - gce
+        - hyperv
+        - install-iso
+        - install-iso-hyperv
+        - iso
+        - kexec
+        - kexec-bundle
+        - kubevirt
+        - linode
+        - lxc
+        - lxc-metadata
+        - openstack
+        - proxmox
+        - proxmox-lxc
+        - qcow
+        - raw
+        - raw-efi
+        - sd-aarch64
+        - sd-aarch64-installer
+        - vagrant-virtualbox
+        - virtualbox
+        - vm
+        - vm-bootloader
+        - vm-nogui
+        - vmware
+outputs:
+  image-path:
+    description: "Compiled path of the nixOS image"
+    value: ${{ steps.generate-image.outputs.image-path }}
+
+runs:
+  using: "composite"
+  steps:
+    # Cache nix with
+    # https://github.com/marketplace/actions/magic-nix-cache
+    - uses: DeterminateSystems/nix-installer-action@main
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - uses: DeterminateSystems/flake-checker-action@main 
+
+    # Runs a single command using the runners shell
+    - name: Install NixOS image builder
+      run: |
+        echo "Installing image builder nixos-generators..."
+        nix profile install github:nix-community/nixos-generators
+      shell: bash
+
+    # Runs a set of commands using the runners shell
+    - name: Save and Build NixOS Image
+      id: generate-image
+      run: |
+        echo "Generating the nixOS image..." 
+        echo "IMAGE_PATH=$(nixos-generate -f proxmox-lxc -c configuration.nix)" >> $GITHUB_OUTPUT
+      shell: bash    
+

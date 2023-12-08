@@ -10,39 +10,39 @@ inputs:
     required: true
     type: choice
     options:
-        - info
-        - warning
-        - debug
-        - amazon
-        - azure
-        - cloudstack
-        - do
-        - docker
-        - gce
-        - hyperv
-        - install-iso
-        - install-iso-hyperv
-        - iso
-        - kexec
-        - kexec-bundle
-        - kubevirt
-        - linode
-        - lxc
-        - lxc-metadata
-        - openstack
-        - proxmox
-        - proxmox-lxc
-        - qcow
-        - raw
-        - raw-efi
-        - sd-aarch64
-        - sd-aarch64-installer
-        - vagrant-virtualbox
-        - virtualbox
-        - vm
-        - vm-bootloader
-        - vm-nogui
-        - vmware
+      - info
+      - warning
+      - debug
+      - amazon
+      - azure
+      - cloudstack
+      - do
+      - docker
+      - gce
+      - hyperv
+      - install-iso
+      - install-iso-hyperv
+      - iso
+      - kexec
+      - kexec-bundle
+      - kubevirt
+      - linode
+      - lxc
+      - lxc-metadata
+      - openstack
+      - proxmox
+      - proxmox-lxc
+      - qcow
+      - raw
+      - raw-efi
+      - sd-aarch64
+      - sd-aarch64-installer
+      - vagrant-virtualbox
+      - virtualbox
+      - vm
+      - vm-bootloader
+      - vm-nogui
+      - vmware
     default: install-iso
 
 outputs:

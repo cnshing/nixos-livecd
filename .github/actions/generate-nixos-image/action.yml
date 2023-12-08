@@ -73,6 +73,6 @@ runs:
         echo "Generating the nixOS image..." 
         # Github Inputs are inaccessible for nested composite actions, use github_env as a workaround instead
         # See https://github.com/actions/runner/issues/2009
-        echo "IMAGE_PATH=$(nixos-generate -f ${{ inputs.format }} -c ${{ inputs.configuration }})" >> $GITHUB_ENV
+        echo "image-path=$(nixos-generate -f ${{ inputs.format }} -c ${{ inputs.configuration }})" >> $GITHUB_ENV
       shell: bash    
 

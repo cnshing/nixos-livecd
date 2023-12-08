@@ -38,6 +38,19 @@ jobs:
           format: ${{ matrix.formats }}
         id: generate-image
 
+      - name: Assign Artifact filename
+        run: |
+          # Get short git hash from
+          # https://stackoverflow.com/questions/58886293/getting-current-branch-and-commit-hash-in-github-action
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          # Seperate filename and extensions from path
+          # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash
+          filename=$(basename -- "${{ env.image-path }}")
+          extension="${filename##*.}"
+          filename="${filename%.*}"
+          echo "artifact-name=${filename}-${git_hash}.${extension}" >> $GITHUB_ENV
+
       - uses: actions/upload-artifact@v3
         with:
-          path: ${{ env.IMAGE_PATH }}
+          name: ${{ env.artifact-name }}
+          path: ${{ env.image-path }}

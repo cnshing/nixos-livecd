@@ -38,7 +38,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Generate NixOS Image
-        uses: ./github/actions/generate-nixos-image
+        uses: ./.github/actions/generate-nixos-image
         with:
           configuration: configuration.nix
           format: ${{ matrix.formats }}

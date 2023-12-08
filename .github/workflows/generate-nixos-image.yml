@@ -67,6 +67,6 @@ runs:
       id: generate-image
       run: |
         echo "Generating the nixOS image..." 
-        echo "IMAGE_PATH=$(nixos-generate -f proxmox-lxc -c configuration.nix)" >> $GITHUB_OUTPUT
+        echo "IMAGE_PATH=$(nixos-generate -f ${{ inputs.format }} -c ${{ inputs.configuration }})" >> $GITHUB_OUTPUT
       shell: bash    
 

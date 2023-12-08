@@ -7,40 +7,44 @@ inputs:
     default: 'configuration.nix'
   format:
     description: 'The nixOS image format'
+    required: true
+    type: choice
     options:
-        - info
-        - warning
-        - debug
-        - amazon
-        - azure
-        - cloudstack
-        - do
-        - docker
-        - gce
-        - hyperv
-        - install-iso
-        - install-iso-hyperv
-        - iso
-        - kexec
-        - kexec-bundle
-        - kubevirt
-        - linode
-        - lxc
-        - lxc-metadata
-        - openstack
-        - proxmox
-        - proxmox-lxc
-        - qcow
-        - raw
-        - raw-efi
-        - sd-aarch64
-        - sd-aarch64-installer
-        - vagrant-virtualbox
-        - virtualbox
-        - vm
-        - vm-bootloader
-        - vm-nogui
-        - vmware
+      - info
+      - warning
+      - debug
+      - amazon
+      - azure
+      - cloudstack
+      - do
+      - docker
+      - gce
+      - hyperv
+      - install-iso
+      - install-iso-hyperv
+      - iso
+      - kexec
+      - kexec-bundle
+      - kubevirt
+      - linode
+      - lxc
+      - lxc-metadata
+      - openstack
+      - proxmox
+      - proxmox-lxc
+      - qcow
+      - raw
+      - raw-efi
+      - sd-aarch64
+      - sd-aarch64-installer
+      - vagrant-virtualbox
+      - virtualbox
+      - vm
+      - vm-bootloader
+      - vm-nogui
+      - vmware
+    default: install-iso
+
 outputs:
   image-path:
     description: "Compiled path of the nixOS image"
@@ -49,11 +53,11 @@ outputs:
 runs:
   using: "composite"
   steps:
-    # Cache nix with
+    # Install and cache nix with
     # https://github.com/marketplace/actions/magic-nix-cache
     - uses: DeterminateSystems/nix-installer-action@main
     - uses: DeterminateSystems/magic-nix-cache-action@main
-    - uses: DeterminateSystems/flake-checker-action@main 
+    - uses: DeterminateSystems/flake-checker-action@main
 
     # Runs a single command using the runners shell
     - name: Install NixOS image builder
@@ -67,6 +71,8 @@ runs:
       id: generate-image
       run: |
         echo "Generating the nixOS image..." 
-        echo "IMAGE_PATH=$(nixos-generate -f proxmox-lxc -c configuration.nix)" >> $GITHUB_OUTPUT
+        # Github Inputs are inaccessible for nested composite actions, use github_env as a workaround instead
+        # See https://github.com/actions/runner/issues/2009
+        echo "image-path=$(nixos-generate -f ${{ inputs.format }} -c ${{ inputs.configuration }})" >> $GITHUB_ENV
       shell: bash    
 

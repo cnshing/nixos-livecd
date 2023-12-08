@@ -7,6 +7,8 @@ inputs:
     default: 'configuration.nix'
   format:
     description: 'The nixOS image format'
+    required: true
+    type: choice
     options:
         - info
         - warning
@@ -41,6 +43,8 @@ inputs:
         - vm-bootloader
         - vm-nogui
         - vmware
+    default: install-iso
+
 outputs:
   image-path:
     description: "Compiled path of the nixOS image"

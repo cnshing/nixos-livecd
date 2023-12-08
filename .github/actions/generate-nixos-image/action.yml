@@ -53,11 +53,10 @@ outputs:
 runs:
   using: "composite"
   steps:
-    # Cache nix with
+    # Install nix with
     # https://github.com/marketplace/actions/magic-nix-cache
     - uses: DeterminateSystems/nix-installer-action@main
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - uses: DeterminateSystems/flake-checker-action@main 
+    - uses: DeterminateSystems/flake-checker-action@main
 
     # Runs a single command using the runners shell
     - name: Install NixOS image builder

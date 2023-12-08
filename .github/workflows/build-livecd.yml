@@ -32,9 +32,7 @@ jobs:
 
       # Cache nix with
       # https://github.com/marketplace/actions/magic-nix-cache
-      - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: DeterminateSystems/flake-checker-action@main
 
       # Runs a single command using the runners shell
       - name: Generate NixOS Image

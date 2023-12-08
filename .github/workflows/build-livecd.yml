@@ -30,10 +30,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Cache nix with
-      # https://github.com/marketplace/actions/magic-nix-cache
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-
       # Runs a single command using the runners shell
       - name: Generate NixOS Image
         uses: ./.github/actions/generate-nixos-image

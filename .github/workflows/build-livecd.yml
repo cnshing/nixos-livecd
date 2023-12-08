@@ -38,22 +38,13 @@ jobs:
           format: ${{ matrix.formats }}
         id: generate-image
 
-
-      # Extract the filename and extension
-      - uses: actions-ecosystem/action-regex-match@v2
-        id: regex-match
-        with:
-          text: ${{ env.image-path }}
-          regex: '([^\/]+?)(\..+)?$'
-
       - name: Assign Artifact filename
         run: |
           # Get short git hash from
           # https://stackoverflow.com/questions/58886293/getting-current-branch-and-commit-hash-in-github-action
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
-          filename=${{ steps.regex-match.outputs.group1 }}
-          extension=${{ steps.regex-match.outputs.group2 }}
-          echo "artifact-name=${filename}-${git_hash}.${extension}" >> $GITHUB_ENV
+          filename=$(basename ${{ env.image-path }})
+          echo "artifact-name=${{ matrix.formats }}-${git_hash}-${filename}" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         with:

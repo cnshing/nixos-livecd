@@ -1,0 +1,69 @@
+name: 'pre-criteria-assessment'
+description: 'Automatically passes or fails workflow based off a set of criteria'
+inputs:
+  non-impact-code:
+    description: "Should the workflow automatically pass workflows or jobs with only non-impact code(like only documentation changes)?"
+    type: boolean
+    required: false
+    default: true
+  skip-duplicates:
+    description: "Should the workflow automatically pass duplicate workflows or jobs?"
+    type: boolean
+    required: false
+    default: true
+outputs:
+  skippable:
+    description: "Whether or not the pre criteria assessment passes a workflow or job from running"
+    type: boolean
+    value: ${{ env.skippable }}
+    default: false
+
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Check for any duplicate running actions
+      uses: fkirc/skip-duplicate-actions@v5
+      id: skip-duplicates
+      with:
+        cancel_others: 'true'
+        skip_after_succesful_duplicate: 'true'
+        concurrent_skipping: 'same_content'
+      run: |
+        if [ ${{ steps.skip-duplicates.outputs.should_skip }} == 'true']; then
+          echo "This workflow/job should be skipped due to the following reason:"
+          echo "${{steps.skip-duplicates.outputs.reason }}"
+          echo "skippable=${{ true }}" >> $GITHUB_ENV
+        fi
+        
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get all non-impact changed files
+      id: non-impact-changed-files
+      uses: tj-actions/changed-files@v40
+      with:
+        # Todo: Replace the files with a single variable to remove code duplication
+        files: |
+          docs/**
+          LICENSE
+          README.md
+    
+    - name: Get all impact changing files
+      id: impact-changed-files
+      uses: tj-actions/changed-files@v40
+      with:
+        files_ignore: |
+          docs/**
+          LICENSE
+          README.md
+      
+    - name: Check if only non-impacting code has changed and pass as necessary
+      if: ${{ (inputs.non-impact-code) && (steps.non-impact-changed-files.outputs.any_changed == 'true') && (steps.impact-changed-files.outputs.any_changed == 'false') }}
+      shell: bash
+      run: |
+          echo "This workflow/job should be skipped due to the following reason:"
+          echo "skip_non_impact_code_changes"
+          echo "skippable=${{ true }}" >> $GITHUB_ENV

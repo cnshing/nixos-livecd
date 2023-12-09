@@ -31,16 +31,12 @@ runs:
       with:
         cancel_others: 'true'
         skip_after_successful_duplicate: 'true'
-        concurrent_skipping: 'same_content'
+        concurrent_skipping: 'same_content_newer'
 
     - name: Skip any duplicate running actions if necessary
       shell: bash
       run: |
         if [ ${{ steps.skip-duplicates.outputs.should_skip }} == 'true' ]; then
-          echo "This workflow/job should be skipped due to the following reason:"
-          echo "${{steps.skip-duplicates.outputs.reason }}"
-          # Skippable should be string format due to truthy expressions
-          # See https://github.com/actions/runner/issues/1173
           echo "skippable=true" >> $GITHUB_ENV
         fi
         
@@ -71,6 +67,10 @@ runs:
       if: ${{ (inputs.non-impact-code) && (steps.non-impact-changed-files.outputs.any_changed == 'true') && (steps.impact-changed-files.outputs.any_changed == 'false') }}
       shell: bash
       run: |
-          echo "This workflow/job should be skipped due to the following reason:"
-          echo "skip_non_impact_code_changes"
           echo "skippable=true" >> $GITHUB_ENV
+
+    - name: Log non-impact code status to summary
+      shell: bash
+      run: |
+        echo "## Non-impact Code Status" >> $GITHUB_STEP_SUMMARY
+        echo "Are code changes non-impact: ${{ env.skippable }}" >> $GITHUB_STEP_SUMMARY

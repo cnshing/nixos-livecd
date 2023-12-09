@@ -30,7 +30,7 @@ jobs:
         id: pre-criteria-assessment
 
       - name: Assign pre criteria assessment status
-        run: echo "skippable=${{ env.skippable }}" >> $GITHUB_OUTPUT
+        run: echo "skippable=${{ env.skippable }}" >> "$GITHUB_OUTPUT"
 
   # This workflow contains a single job called "build"
   build:

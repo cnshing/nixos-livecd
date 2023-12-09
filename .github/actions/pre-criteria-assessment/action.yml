@@ -25,13 +25,16 @@ runs:
       shell: bash
       run: echo "skippable=${{ false }}" >> $GITHUB_ENV
 
-    - name: Check for any duplicate running actions
+    - name: Analyze any duplicate running actions
       uses: fkirc/skip-duplicate-actions@v5
       id: skip-duplicates
       with:
         cancel_others: 'true'
         skip_after_succesful_duplicate: 'true'
         concurrent_skipping: 'same_content'
+
+    - name: Skip any duplicate running actions if necessary
+      shell: bash
       run: |
         if [ ${{ steps.skip-duplicates.outputs.should_skip }} == 'true']; then
           echo "This workflow/job should be skipped due to the following reason:"

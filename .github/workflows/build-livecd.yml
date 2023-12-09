@@ -31,7 +31,7 @@ jobs:
 
       - name: Assign pre criteria assessment status
         run: |
-          echo "skippable=${{ env.skippable }}" >> $GITHUB_OUTPUT
+          echo "skippable=${{ env.skippable }}" >> "$GITHUB_OUTPUT"
           echo $GITHUB_OUTPUT >> $GITHUB_STEP_SUMMARY
 
   # This workflow contains a single job called "build"
@@ -46,7 +46,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: test need
-        run: echo ${{ needs.pre_assessment_check.outputs.skippable }}
+      - env:
+          OUTPUT1: ${{needs.pre_assessment_check.outputs.skippable}}
+        run: echo $OUTPUT1
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3

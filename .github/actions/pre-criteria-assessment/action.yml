@@ -14,14 +14,16 @@ inputs:
 outputs:
   skippable:
     description: "Whether or not the pre criteria assessment passes a workflow or job from running"
-    type: boolean
     value: ${{ env.skippable }}
-    default: false
 
 
 runs:
   using: "composite"
   steps:
+
+    - name: Set default output variables
+      shell: bash
+      run: echo "skippable=${{ false }}" >> $GITHUB_ENV
 
     - name: Check for any duplicate running actions
       uses: fkirc/skip-duplicate-actions@v5

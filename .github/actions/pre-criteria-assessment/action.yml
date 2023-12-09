@@ -73,4 +73,13 @@ runs:
       shell: bash
       run: |
         echo "## Non-impact Code Status" >> $GITHUB_STEP_SUMMARY
-        echo "Are code changes non-impact: ${{ env.skippable }}" >> $GITHUB_STEP_SUMMARY
+        echo "Are code changes non-impact: *${{ env.skippable }}*" >> $GITHUB_STEP_SUMMARY
+        echo "### Impact code changes: *${{ steps.impact-changed-files.outputs.all_changed_and_modified_files_count }}* files" >> $GITHUB_STEP_SUMMARY
+        for file in ${{ steps.impact-changed-files.outputs.all_changed_and_modified_files }}; do
+            echo "$file" >> $GITHUB_STEP_SUMMARY
+        done
+        echo "### Non-impact code changes: *${{ steps.non-impact-changed-files.outputs.all_changed_and_modified_files_count }}* files" >> $GITHUB_STEP_SUMMARY
+        for file in ${{ steps.non-impact-changed-files.outputs.all_changed_and_modified_files }}; do
+            echo "$file" >> $GITHUB_STEP_SUMMARY
+        done
+        

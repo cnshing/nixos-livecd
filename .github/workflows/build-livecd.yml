@@ -46,7 +46,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: test need
-      - env:
+        env:
           OUTPUT1: ${{needs.pre_assessment_check.outputs.skippable}}
         run: echo $OUTPUT1
 

@@ -14,7 +14,7 @@ inputs:
 outputs:
   skippable:
     description: "Whether or not the pre criteria assessment passes a workflow or job from running"
-    value: ${{ env.skippable }}
+    value: "${{ env.skippable }}"
 
 
 runs:
@@ -39,7 +39,9 @@ runs:
         if [ ${{ steps.skip-duplicates.outputs.should_skip }} == 'true']; then
           echo "This workflow/job should be skipped due to the following reason:"
           echo "${{steps.skip-duplicates.outputs.reason }}"
-          echo "skippable=${{ true }}" >> $GITHUB_ENV
+          # Skippable should be string format due to truthy expressions
+          # See https://github.com/actions/runner/issues/1173
+          echo "skippable=true" >> $GITHUB_ENV
         fi
         
     - uses: actions/checkout@v4
@@ -71,4 +73,4 @@ runs:
       run: |
           echo "This workflow/job should be skipped due to the following reason:"
           echo "skip_non_impact_code_changes"
-          echo "skippable=${{ true }}" >> $GITHUB_ENV
+          echo "skippable=true" >> $GITHUB_ENV

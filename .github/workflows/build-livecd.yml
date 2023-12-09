@@ -39,7 +39,7 @@ jobs:
         uses: ./.github/actions/pre-criteria-assessment
 
       - name: Check on pre criteria assessment and skip if necessary
-        if: ${{ env.skippable }}
+        if: ${{ env.skippable == 'true' }}
         run: |
           echo "Skipping build as it passes pre criteria assessment"
           exit 0

@@ -30,7 +30,7 @@ runs:
       id: skip-duplicates
       with:
         cancel_others: 'true'
-        skip_after_succesful_duplicate: 'true'
+        skip_after_successful_duplicate: 'true'
         concurrent_skipping: 'same_content'
 
     - name: Skip any duplicate running actions if necessary

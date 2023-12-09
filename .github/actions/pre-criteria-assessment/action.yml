@@ -31,7 +31,7 @@ runs:
       with:
         cancel_others: 'true'
         skip_after_successful_duplicate: 'true'
-        concurrent_skipping: 'same_content'
+        concurrent_skipping: 'same_content_newer'
 
     - name: Skip any duplicate running actions if necessary
       shell: bash

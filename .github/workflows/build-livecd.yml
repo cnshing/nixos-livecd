@@ -15,6 +15,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+permissions:
+  actions: write
+  contents: read
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -27,6 +31,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
+      - name: Apply pre criteria assessment
+        uses: ./.github/actions/pre-criteria-assessment
+
+      - name: Check on pre criteria assessment and skip if necessary
+        if: ${{ env.skippable }}
+        run: |
+          echo "Skipping build as it passes pre criteria assessment"
+          exit 0
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 

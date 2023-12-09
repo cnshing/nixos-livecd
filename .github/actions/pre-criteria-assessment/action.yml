@@ -36,7 +36,7 @@ runs:
     - name: Skip any duplicate running actions if necessary
       shell: bash
       run: |
-        if [ ${{ steps.skip-duplicates.outputs.should_skip }} == 'true']; then
+        if [ ${{ steps.skip-duplicates.outputs.should_skip }} == 'true' ]; then
           echo "This workflow/job should be skipped due to the following reason:"
           echo "${{steps.skip-duplicates.outputs.reason }}"
           # Skippable should be string format due to truthy expressions

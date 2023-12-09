@@ -71,6 +71,10 @@ runs:
       if: ${{ (inputs.non-impact-code) && (steps.non-impact-changed-files.outputs.any_changed == 'true') && (steps.impact-changed-files.outputs.any_changed == 'false') }}
       shell: bash
       run: |
-          echo "This workflow/job should be skipped due to the following reason:"
-          echo "skip_non_impact_code_changes"
           echo "skippable=true" >> $GITHUB_ENV
+
+    - name: Log non-impact code status to summary
+      shell: bash
+      run: |
+        echo "## Non-impact Code Status" >> $GITHUB_STEP_SUMMARY
+        echo "Are code changes non-impact: ${{ env.skippable }}" >> $GITHUB_STEP_SUMMARY

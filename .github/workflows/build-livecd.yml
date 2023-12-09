@@ -6,19 +6,36 @@ name: build-livecd
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    paths-ignore:
-      - 'docs/**'
   pull_request:
-    paths-ignore:
-      - 'docs/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+permissions:
+  actions: write
+  contents: read
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  pre_assessment_check:
+    runs-on: ubuntu-latest
+    outputs:
+      skippable: ${{ steps.pre-criteria-assessment.outputs.skippable }}
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Run pre criteria assessment
+        uses: ./.github/actions/pre-criteria-assessment
+        id: pre-criteria-assessment
+
+      - name: Assign pre criteria assessment status
+        run: echo "skippable=${{ env.skippable }}" >> $GITHUB_OUTPUT
+
   # This workflow contains a single job called "build"
   build:
+    needs: pre_assessment_check
+    if: needs.pre_assessment_check.outputs.skippable != 'true'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
@@ -27,6 +44,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 

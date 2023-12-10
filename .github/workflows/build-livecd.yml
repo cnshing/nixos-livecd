@@ -14,42 +14,9 @@ on:
       format:
         description: 'The nixOS image format'
         required: true
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
-          - amazon
-          - azure
-          - cloudstack
-          - do
-          - docker
-          - gce
-          - hyperv
-          - install-iso
-          - install-iso-hyperv
-          - iso
-          - kexec
-          - kexec-bundle
-          - kubevirt
-          - linode
-          - lxc
-          - lxc-metadata
-          - openstack
-          - proxmox
-          - proxmox-lxc
-          - qcow
-          - raw
-          - raw-efi
-          - sd-aarch64
-          - sd-aarch64-installer
-          - vagrant-virtualbox
-          - virtualbox
-          - vm
-          - vm-bootloader
-          - vm-nogui
-          - vmware
-        default: install-iso
+        type: string
+        default: 'install-iso'
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     # TODO: Once input duplication is not needed anymore, refactor the input duplicate code.

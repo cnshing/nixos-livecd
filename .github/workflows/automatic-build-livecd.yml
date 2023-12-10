@@ -38,13 +38,8 @@ jobs:
     strategy:
       matrix:
         formats: [install-iso, proxmox-lxc]
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Runs a single command using the runners shell
-      - name: Call build workflow
-        uses: ./.github/workflows/build-livecd.yml
-        with:
-          configuration: configuration.nix
-          format: ${{ matrix.formats }}
+    uses: ./.github/workflows/build-livecd.yml
+      with:
+        configuration: configuration.nix
+        format: ${{ matrix.formats }}
 

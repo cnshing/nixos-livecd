@@ -39,7 +39,7 @@ jobs:
       matrix:
         formats: [install-iso, proxmox-lxc]
     uses: ./.github/workflows/build-livecd.yml
-      with:
-        configuration: configuration.nix
-        format: ${{ matrix.formats }}
+    with:
+      configuration: configuration.nix
+      format: ${{ matrix.formats }}
 

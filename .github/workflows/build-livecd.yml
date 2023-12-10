@@ -4,44 +4,75 @@ name: build-livecd
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-  pull_request:
+  workflow_call:
+    inputs:
+      configuration:  
+        description: 'The path or filename of the nix configuration describing the image'
+        type: string
+        required: true
+        default: 'configuration.nix'
+      format:
+        description: 'The nixOS image format'
+        required: true
+        type: string
+        default: 'install-iso'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-permissions:
-  actions: write
-  contents: read
+    # TODO: Once input duplication is not needed anymore, refactor the input duplicate code.
+    # See https://github.com/orgs/community/discussions/39357
+    inputs:
+      configuration:  
+        description: 'The path or filename of the nix configuration describing the image'
+        type: string
+        required: true
+        default: 'configuration.nix'
+      format:
+        description: 'The nixOS image format'
+        required: true
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+          - amazon
+          - azure
+          - cloudstack
+          - do
+          - docker
+          - gce
+          - hyperv
+          - install-iso
+          - install-iso-hyperv
+          - iso
+          - kexec
+          - kexec-bundle
+          - kubevirt
+          - linode
+          - lxc
+          - lxc-metadata
+          - openstack
+          - proxmox
+          - proxmox-lxc
+          - qcow
+          - raw
+          - raw-efi
+          - sd-aarch64
+          - sd-aarch64-installer
+          - vagrant-virtualbox
+          - virtualbox
+          - vm
+          - vm-bootloader
+          - vm-nogui
+          - vmware
+        default: install-iso
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  pre_assessment_check:
-    runs-on: ubuntu-latest
-    outputs:
-      skippable: ${{ steps.pre-criteria-assessment.outputs.skippable }}
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      - name: Run pre criteria assessment
-        uses: ./.github/actions/pre-criteria-assessment
-
-      - name: Assign pre criteria assessment status
-        id: pre-criteria-assessment
-        run: echo "skippable=${{ env.skippable }}" >> $GITHUB_OUTPUT
-
   # This workflow contains a single job called "build"
   build:
-    needs: pre_assessment_check
-    if: needs.pre_assessment_check.outputs.skippable != 'true'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        formats: [install-iso, proxmox-lxc]
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
@@ -52,8 +83,8 @@ jobs:
       - name: Generate NixOS Image
         uses: ./.github/actions/generate-nixos-image
         with:
-          configuration: configuration.nix
-          format: ${{ matrix.formats }}
+          configuration: ${{ inputs.configuration }}
+          format: ${{ inputs.format  }}
         id: generate-image
 
       - name: Assign Artifact filename
@@ -62,7 +93,7 @@ jobs:
           # https://stackoverflow.com/questions/58886293/getting-current-branch-and-commit-hash-in-github-action
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
           filename=$(basename ${{ env.image-path }})
-          echo "artifact-name=${{ matrix.formats }}-${git_hash}-${filename}" >> $GITHUB_ENV
+          echo "artifact-name=${{ inputs.format }}-${git_hash}-${filename}" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         with:

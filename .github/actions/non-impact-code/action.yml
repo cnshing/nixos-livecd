@@ -7,7 +7,7 @@ inputs:
 outputs:
   impactful:
     description: "Whether the code changes affect the build"
-    value: "${{ steps.compare-code.outputs.impactful }}"
+    value: ${{ steps.compare-code.outputs.impactful }}
 
 
 runs:

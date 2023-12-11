@@ -1,5 +1,5 @@
-name: 'pre-criteria-assessment'
-description: 'Automatically passes or fails workflow based off a set of criteria'
+name: "pre-criteria-assessment"
+description: "Automatically passes or fails workflow based off a set of criteria"
 inputs:
   non-impact-code:
     description: "Should the workflow automatically pass workflows or jobs with only non-impact code(like only documentation changes)?"
@@ -16,70 +16,33 @@ outputs:
     description: "Whether or not the pre criteria assessment passes a workflow or job from running"
     value: "${{ env.skippable }}"
 
-
 runs:
   using: "composite"
   steps:
-
-    - name: Set default output variables
-      shell: bash
-      run: echo "skippable=${{ false }}" >> $GITHUB_ENV
+    - name: Run non-impact-code analysis
+      uses: ./.github/actions/non-impact-code
+      id: non-impact-code
+      if: ${{ inputs.non-impact-code }}
+      with:
+        non-impact-files: |
+          docs/**
+          LICENSE
+          README.md
 
     - name: Analyze any duplicate running actions
       uses: fkirc/skip-duplicate-actions@v5
       id: skip-duplicates
+      if: ${{ inputs.skip-duplicates }}
       with:
-        cancel_others: 'true'
-        skip_after_successful_duplicate: 'true'
-        concurrent_skipping: 'same_content_newer'
+        cancel_others: "true"
+        skip_after_successful_duplicate: "true"
+        concurrent_skipping: "same_content_newer"
 
-    - name: Skip any duplicate running actions if necessary
-      shell: bash
+    - name: Assign the pre-criteria-assessment results
+      id: assessment-status
       run: |
-        if [ ${{ steps.skip-duplicates.outputs.should_skip }} == 'true' ]; then
-          echo "skippable=true" >> $GITHUB_ENV
-        fi
-        
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Get all non-impact changed files
-      id: non-impact-changed-files
-      uses: tj-actions/changed-files@v40
-      with:
-        # Todo: Replace the files with a single variable to remove code duplication
-        files: |
-          docs/**
-          LICENSE
-          README.md
-    
-    - name: Get all impact changing files
-      id: impact-changed-files
-      uses: tj-actions/changed-files@v40
-      with:
-        files_ignore: |
-          docs/**
-          LICENSE
-          README.md
-      
-    - name: Check if only non-impacting code has changed and pass as necessary
-      if: ${{ (inputs.non-impact-code) && (steps.non-impact-changed-files.outputs.any_changed == 'true') && (steps.impact-changed-files.outputs.any_changed == 'false') }}
-      shell: bash
-      run: |
-          echo "skippable=true" >> $GITHUB_ENV
-
-    - name: Log non-impact code status to summary
-      shell: bash
-      run: |
-        echo "## Non-impact Code Status" >> $GITHUB_STEP_SUMMARY
-        echo "Are code changes non-impact: *${{ env.skippable }}*" >> $GITHUB_STEP_SUMMARY
-        echo "### Impact code changes: *${{ steps.impact-changed-files.outputs.all_changed_and_modified_files_count }}* files" >> $GITHUB_STEP_SUMMARY
-        for file in ${{ steps.impact-changed-files.outputs.all_changed_and_modified_files }}; do
-            echo "$file" >> $GITHUB_STEP_SUMMARY
-        done
-        echo "### Non-impact code changes: *${{ steps.non-impact-changed-files.outputs.all_changed_and_modified_files_count }}* files" >> $GITHUB_STEP_SUMMARY
-        for file in ${{ steps.non-impact-changed-files.outputs.all_changed_and_modified_files }}; do
-            echo "$file" >> $GITHUB_STEP_SUMMARY
-        done
-        
+        echo "skippable=${{ 
+        ((inputs.non-impact-code) && (steps.non-impact-code.outputs.impactful)) 
+        || 
+        ((inputs.skip-duplicates) && (steps.skip-duplicates.outputs.should_skip)) 
+        }}" >> $GITHUB_ENV

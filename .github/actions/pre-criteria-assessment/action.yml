@@ -3,14 +3,12 @@ description: "Automatically passes or fails workflow based off a set of criteria
 inputs:
   non-impact-code:
     description: "Should the workflow automatically pass workflows or jobs with only non-impact code(like only documentation changes)?"
-    type: boolean
     required: false
-    default: true
+    default: 'true'
   skip-duplicates:
     description: "Should the workflow automatically pass duplicate workflows or jobs?"
-    type: boolean
     required: false
-    default: true
+    default: 'true'
 outputs:
   skippable:
     description: "Whether or not the pre criteria assessment passes a workflow or job from running"
@@ -22,7 +20,7 @@ runs:
     - name: Run non-impact-code analysis
       uses: ./.github/actions/non-impact-code
       id: non-impact-code
-      if: ${{ inputs.non-impact-code }}
+      if: ${{ inputs.non-impact-code == 'true' }}
       with:
         non-impact-files: |
           docs/**
@@ -32,7 +30,7 @@ runs:
     - name: Analyze any duplicate running actions
       uses: fkirc/skip-duplicate-actions@v5
       id: skip-duplicates
-      if: ${{ inputs.skip-duplicates }}
+      if: ${{ inputs.skip-duplicates == 'true' }}
       with:
         cancel_others: "true"
         skip_after_successful_duplicate: "true"
@@ -40,9 +38,10 @@ runs:
 
     - name: Assign the pre-criteria-assessment results
       id: assessment-status
+      shell: bash
       run: |
         echo "skippable=${{ 
-        ((inputs.non-impact-code) && (steps.non-impact-code.outputs.impactful)) 
+        ((inputs.non-impact-code == 'true') && (steps.non-impact-code.outputs.impactful)) 
         || 
-        ((inputs.skip-duplicates) && (steps.skip-duplicates.outputs.should_skip)) 
+        ((inputs.skip-duplicates == 'true') && (steps.skip-duplicates.outputs.should_skip)) 
         }}" >> $GITHUB_ENV

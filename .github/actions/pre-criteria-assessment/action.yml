@@ -17,6 +17,15 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Analyze any duplicate running actions
+      uses: fkirc/skip-duplicate-actions@v5
+      id: skip-duplicates
+      if: ${{ inputs.skip-duplicates == 'true' }}
+      with:
+        cancel_others: "true"
+        skip_after_successful_duplicate: "true"
+        concurrent_skipping: "same_content_newer"
+
     - name: Run non-impact-code analysis
       uses: ./.github/actions/non-impact-code
       id: non-impact-code
@@ -26,15 +35,6 @@ runs:
           docs/**
           LICENSE
           README.md
-
-    - name: Analyze any duplicate running actions
-      uses: fkirc/skip-duplicate-actions@v5
-      id: skip-duplicates
-      if: ${{ inputs.skip-duplicates == 'true' }}
-      with:
-        cancel_others: "true"
-        skip_after_successful_duplicate: "true"
-        concurrent_skipping: "same_content_newer"
 
     - name: Assign the pre-criteria-assessment results
       id: assessment-status

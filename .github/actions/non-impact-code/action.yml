@@ -1,0 +1,49 @@
+name: 'non-impact-code'
+description: 'Check to see if code changes are impactful'
+inputs:
+    non-impact-files:  
+      description: 'A file or list of files marked as non-impact'
+      required: true
+outputs:
+  impactful:
+    description: "Whether the code changes affect the build"
+    value: ${{ steps.compare-code.outputs.impactful }}
+
+
+runs:
+  using: "composite"
+  steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get all non-impact changed files
+        id: non-impact-changed-files
+        uses: tj-actions/changed-files@v40
+        with:
+          files: ${{ inputs.non-impact-files }}
+      
+      - name: Get all impact changing files
+        id: impact-changed-files
+        uses: tj-actions/changed-files@v40
+        with:
+          files_ignore: ${{ inputs.non-impact-files }}
+        
+      - name: Check non-impact-code
+        id: compare-code
+        shell: bash
+        run: echo "impactful=${{ (steps.non-impact-changed-files.outputs.any_changed == 'true') && (steps.impact-changed-files.outputs.any_changed == 'false') }}" >> $GITHUB_OUTPUT
+
+      - name: Log non-impact code status to summary
+        shell: bash
+        run: |
+          echo "## Non-impact Code Status" >> $GITHUB_STEP_SUMMARY
+          echo "Are code changes non-impact: *${{ steps.compare-code.outputs.impactful }}*" >> $GITHUB_STEP_SUMMARY
+          echo "### Impact code changes: *${{ steps.impact-changed-files.outputs.all_changed_and_modified_files_count }}* files" >> $GITHUB_STEP_SUMMARY
+          for file in ${{ steps.impact-changed-files.outputs.all_changed_and_modified_files }}; do
+              echo "$file" >> $GITHUB_STEP_SUMMARY
+          done
+          echo "### Non-impact code changes: *${{ steps.non-impact-changed-files.outputs.all_changed_and_modified_files_count }}* files" >> $GITHUB_STEP_SUMMARY
+          for file in ${{ steps.non-impact-changed-files.outputs.all_changed_and_modified_files }}; do
+              echo "$file" >> $GITHUB_STEP_SUMMARY
+          done

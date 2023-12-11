@@ -45,3 +45,9 @@ runs:
         || 
         ((inputs.skip-duplicates == 'true') && (steps.skip-duplicates.outputs.should_skip)) 
         }}" >> $GITHUB_ENV
+
+    - name: Log pre-criteria-assessment summary
+      shell: bash
+      run: |
+        echo "## Assessment Results" >> $GITHUB_STEP_SUMMARY
+        echo "Should the build be skipped: *${{ env.skippable }}*" >> $GITHUB_STEP_SUMMARY

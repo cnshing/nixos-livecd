@@ -88,7 +88,7 @@ jobs:
           #Move will require sudo permissions
           sudo mv "$filename" "$artifact_name"
           #Preserve nix store directory with hard link
-          ln "$artifact_name" "$filename"
+          sudo ln "$artifact_name" "$filename"
           echo "asset-path=$(readlink -f '$artifact_name')" >> $GITHUB_OUTPUT
           echo "artifact-name=$artifact_name" >> $GITHUB_ENV
         id: build-files

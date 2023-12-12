@@ -82,8 +82,12 @@ jobs:
           # Get short git hash from
           # https://stackoverflow.com/questions/58886293/getting-current-branch-and-commit-hash-in-github-action
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
-          filename=$(basename ${{ env.image-path }})
-          echo "artifact-name=${{ inputs.format }}-${git_hash}-${filename}" >> $GITHUB_ENV
+          filename=$(basename "${{ env.image-path }}")
+          artifact_name=${{ inputs.format }}-${git_hash}-${filename}
+          target=$(dirname "${{ env.image-path }}")/$artifact_name
+          mv "${{ env.image-path }}" "$target"
+          echo "image-path=$target" >> $GITHUB_ENV
+          echo "artifact-name=$artifact_name" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v3
         with:

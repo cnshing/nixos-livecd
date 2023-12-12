@@ -32,7 +32,7 @@ jobs:
       configuration: configuration.nix
       format: ${{ matrix.formats }}
   draft_release:
-    needs: build
+    needs: build_release
     runs-on: ubuntu-latest
     env:
       asset-path: ./assets

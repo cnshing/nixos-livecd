@@ -52,7 +52,7 @@ jobs:
       - name: Assign asset filenames
         run: |
           git_hash=$(git rev-parse --short HEAD)
-          for file in ${{ env.asset-path }}; do
+          for file in ${{ env.asset-path }}/*; do
             mv -v "$file" "${file/$git_hash/${{ inputs.tag }}}"
           done
 

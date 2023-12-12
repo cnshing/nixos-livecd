@@ -89,7 +89,7 @@ jobs:
           sudo mv "$filename" "$artifact_name"
           #Preserve nix store directory with hard link
           sudo ln "$artifact_name" "$filename"
-          echo "asset-path=$(readlink -f '$artifact_name')" >> $GITHUB_OUTPUT
+          echo "asset-path=$(readlink -f "${artifact_name}")" >> $GITHUB_OUTPUT
           echo "artifact-name=${artifact_name}" >> $GITHUB_ENV
         id: build-files
 

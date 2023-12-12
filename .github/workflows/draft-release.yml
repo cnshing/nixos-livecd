@@ -25,6 +25,7 @@ permissions:
 jobs:
   build_release:
     strategy:
+      fail-fast: false
       matrix:
         formats: ${{ fromJSON(inputs.formats) }}
     uses: ./.github/workflows/build-livecd.yml

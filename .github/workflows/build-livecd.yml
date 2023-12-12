@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
+run-name: Build a ${{ inputs.format }} livecd with ${{ inputs.configuration }}
 
-name: build-livecd
-
-# Controls when the workflow will run
 on:
   workflow_call:
     inputs:
@@ -17,7 +14,6 @@ on:
         type: string
         default: 'install-iso'
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     # TODO: Once input duplication is not needed anymore, refactor the input duplicate code.
     # See https://github.com/orgs/community/discussions/39357

@@ -33,6 +33,7 @@ jobs:
       format: ${{ matrix.formats }}
   draft_release:
     needs: build_release
+    if: always()
     runs-on: ubuntu-latest
     env:
       asset-path: ./assets

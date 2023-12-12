@@ -7,14 +7,14 @@ on:
   workflow_dispatch:
     inputs:
       tag: 
-        description: 'The release version'
+        description: 'The release version/tag'
         type: string
         required: true
       formats:  
         description: "A list of livecd formats to release as an artifact, using ['a', 'b', 'c'] notation"
         type: string
         required: true
-        default: "['install-iso', 'virtualbox', 'vmware', 'proxmox-lxc', 'proxmox', 'linode', 'hyperv', 'gce', 'docker', 'do', 'cloudstack', 'azure', 'amazon']"
+        default: "['install-iso', 'virtualbox', 'vmware', 'proxmox-lxc', 'proxmox', 'linode', 'hyperv', 'gce', 'docker', 'do', 'azure', 'amazon']"
       commitish:
         description: "Passthrough from action-gh-release: 'Commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Defaults to repository default branch.'"
         required: false

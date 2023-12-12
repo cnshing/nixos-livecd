@@ -11,7 +11,7 @@ on:
         type: string
         required: true
       formats:  
-        description: 'A list of livecd formats to release as an artifact, using ['a', 'b', 'c'] notation'
+        description: "A list of livecd formats to release as an artifact, using ['a', 'b', 'c'] notation"
         type: string
         required: true
         default: "['install-iso', 'virtualbox', 'vmware', 'proxmox-lxc', 'proxmox', 'linode', 'hyperv', 'gce', 'docker', 'do', 'cloudstack', 'azure', 'amazon']"

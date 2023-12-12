@@ -39,12 +39,21 @@ jobs:
       asset-path: ./assets
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.commitish }}
 
       - name: Retrieve the build files
         uses: actions/download-artifact@v3
         id: build-files
         with:
           path: ${{ env.asset-path }}
+
+      - name: Assign asset filenames
+        run: |
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          for file in ${{ env.asset-path }}; do
+            mv -v "$file" "${file/$git_hash/${{ inputs.tag }}}"
+          done
 
       - name: Create the release
         uses: softprops/action-gh-release@v1

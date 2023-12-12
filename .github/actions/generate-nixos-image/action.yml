@@ -59,14 +59,12 @@ runs:
     - uses: DeterminateSystems/magic-nix-cache-action@main
     - uses: DeterminateSystems/flake-checker-action@main
 
-    # Runs a single command using the runners shell
     - name: Install NixOS image builder
       run: |
         echo "Installing image builder nixos-generators..."
         nix profile install github:nix-community/nixos-generators
       shell: bash
 
-    # Runs a set of commands using the runners shell
     - name: Save and Build NixOS Image
       id: generate-image
       run: |

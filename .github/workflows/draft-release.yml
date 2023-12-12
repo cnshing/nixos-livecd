@@ -9,6 +9,7 @@ on:
         description: 'The release version/tag'
         type: string
         required: true
+        default: 'default'
       formats:  
         description: "A list of livecd formats to release as an artifact, using ['a', 'b', 'c'] notation"
         type: string
@@ -31,6 +32,7 @@ jobs:
     with:
       configuration: configuration.nix
       format: ${{ matrix.formats }}
+      commitish: ${{ inputs.commitish }}
   draft_release:
     needs: build_release
     if: always()
@@ -38,9 +40,6 @@ jobs:
     env:
       asset-path: ./assets
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.commitish }}
 
       - name: Retrieve the build files
         uses: actions/download-artifact@v3

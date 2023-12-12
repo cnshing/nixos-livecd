@@ -13,6 +13,10 @@ on:
         required: true
         type: string
         default: 'install-iso'
+      commitish:
+        description: "Manually override which commmit/branch the build should be based on. Passthrough from action-gh-release: 'Commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Defaults to repository default branch.'"
+        type: string
+        required: false
 
   workflow_dispatch:
     # TODO: Once input duplication is not needed anymore, refactor the input duplicate code.
@@ -69,6 +73,8 @@ jobs:
     steps:
 
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.commitish }}
 
       - name: Generate NixOS Image
         uses: ./.github/actions/generate-nixos-image

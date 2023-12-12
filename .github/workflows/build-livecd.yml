@@ -92,9 +92,9 @@ jobs:
           artifact_name=${{ inputs.format }}-${git_hash}-${filename}
           cd "$(dirname '${{ env.image-path }}')"
           #Move will require sudo permissions
-          sudo mv "$filename" "$artifact_name"
+          sudo mv -v "$filename" "$artifact_name"
           #Preserve nix store directory with hard link
-          sudo ln "$artifact_name" "$filename"
+          sudo ln -v "$artifact_name" "$filename"
           echo "asset-path=$(readlink -f "${artifact_name}")" >> $GITHUB_OUTPUT
           echo "artifact-name=${artifact_name}" >> $GITHUB_ENV
         id: build-files

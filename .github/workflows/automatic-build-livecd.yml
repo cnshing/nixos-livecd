@@ -36,7 +36,7 @@ jobs:
     # The type of runner that the job will run on
     strategy:
       matrix:
-        formats: [proxmox-lxc]
+        formats: [install-iso, virtualbox, proxmox-lxc, proxmox, linode, gce, docker, do]
     uses: ./.github/workflows/build-livecd.yml
     with:
       configuration: configuration.nix

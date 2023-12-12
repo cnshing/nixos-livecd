@@ -1,0 +1,58 @@
+# Creates a release
+
+name: draft-release
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      tag: 
+        description: 'The release version'
+        type: string
+        required: true
+      formats:  
+        description: "A list of livecd formats to release as an artifact, using ['a', 'b', 'c'] notation"
+        type: string
+        required: true
+        default: "['install-iso', 'virtualbox', 'vmware', 'proxmox-lxc', 'proxmox', 'linode', 'hyperv', 'gce', 'docker', 'do', 'cloudstack', 'azure', 'amazon']"
+      commitish:
+        description: "Passthrough from action-gh-release: 'Commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Defaults to repository default branch.'"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  build_release:
+    strategy:
+      matrix:
+        formats: ${{ fromJSON(inputs.formats) }}
+    uses: ./.github/workflows/build-livecd.yml
+    with:
+      configuration: configuration.nix
+      format: ${{ matrix.formats }}
+  draft_release:
+    needs: build_release
+    runs-on: ubuntu-latest
+    env:
+      asset-path: ./assets
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Retrieve the build files
+        uses: actions/download-artifact@v3
+        id: build-files
+        with:
+          path: ${{ env.asset-path }}
+
+      - name: Create the release
+        uses: softprops/action-gh-release@v1
+        with: 
+          files: ${{ env.asset-path }}/**
+          tag_name: ${{ inputs.tag }}
+          draft: true
+          target_commitish: ${{ inputs.commitish }}
+          generate_release_notes: true
+          append_body: true
+      
+

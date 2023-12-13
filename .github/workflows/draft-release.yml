@@ -59,7 +59,7 @@ jobs:
           find "${{ steps.build-files.outputs.download-path }}" -type f -exec bash -c '
               asset_dir=$(dirname "$0")
               filename=$(basename "$0")
-              release=$(echo "$filename" | awk "{gsub(/$git_hash/, \"${{ inputs.tag }}\"); print}")
+              release=$(echo "$filename" | awk -v git_hash="$git_hash" "{gsub(git_hash, \"${{ inputs.tag }}\"); print}")
               mv -v "$asset_dir/$filename" "$asset_dir/$release"
           ' {} \;
 

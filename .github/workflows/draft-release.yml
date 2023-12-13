@@ -49,6 +49,17 @@ jobs:
         with:
           path: ${{ env.asset-path }}
 
+      - name: Assign asset filenames
+        run: |
+          git_hash=$(git rev-parse --short HEAD)
+          find "${{ steps.build-files.outputs.download-path }}" -type f -print0 | 
+            while IFS= read -r -d '' path; do 
+              asset_dir=$(dirname "$path")
+              filename=$(basename "$path")
+              release=${filename/$git_hash/"${{ inputs.tag }}"}
+              mv "$asset_dir/$filename" "$asset_dir/$release"
+          done
+
       - name: Create the release
         uses: softprops/action-gh-release@v1
         with: 

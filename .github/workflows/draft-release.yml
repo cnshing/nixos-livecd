@@ -52,7 +52,7 @@ jobs:
       - name: Create the release
         uses: softprops/action-gh-release@v1
         with: 
-          files: ${{ env.asset-path }}/**
+          files: ${{ steps.build-files.outputs.download-path }}/**
           tag_name: ${{ inputs.tag }}
           draft: true
           target_commitish: ${{ inputs.commitish }}

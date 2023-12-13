@@ -59,7 +59,7 @@ jobs:
               asset_dir=$(dirname "$0")
               filename=$(basename "$0")
               release=${filename/$git_hash/${{ inputs.tag }}}
-              mv -v "$asset-dir/$filename" "$asset_dir/$release"
+              mv -v "$asset_dir/$filename" "$asset_dir/$release"
           ' {} \;
 
       - name: List directory

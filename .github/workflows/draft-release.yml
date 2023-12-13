@@ -55,12 +55,11 @@ jobs:
       - name: Assign asset filenames
         run: |
           git_hash=$(git rev-parse --short HEAD)
-          tag_name=${{ inputs.tag }}
           echo $git_hash
           find "${{ steps.build-files.outputs.download-path }}" -type f -exec bash -c '
               asset_dir=$(dirname "$0")
               filename=$(basename "$0")
-              release=${filename/$git_hash/$tag_name}
+              release=$(echo "$filename" | sed -e "s/$git_hash/input/g")
               mv -v "$asset_dir/$filename" "$asset_dir/$release"
           ' {} \;
 

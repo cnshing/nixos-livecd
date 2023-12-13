@@ -55,9 +55,12 @@ jobs:
           cd "${{ steps.build-files.outputs.download-path }}"
           for file in "${{ steps.build-files.outputs.download-path }}"/*; do
             filename=$(basename "$file")
-            release=${file/$git_hash/${{ inputs.tag }}}
+            release=${filename/$git_hash/${{ inputs.tag }}}
             mv -v "$filename" "$release"
           done
+
+      - name: List directory
+        run: ls -R "${{ steps.build-files.outputs.download-path }}"
 
       - name: Create the release
         uses: softprops/action-gh-release@v1

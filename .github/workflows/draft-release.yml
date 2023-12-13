@@ -57,7 +57,7 @@ jobs:
               asset_dir=$(dirname "$path")
               filename=$(basename "$path")
               release=${filename/$git_hash/"${{ inputs.tag }}"}
-              mv "$asset_dir/$filename" "$asset_dir/$release"
+              mv -v "$asset_dir/$filename" "$asset_dir/$release"
           done
 
       - name: Create the release

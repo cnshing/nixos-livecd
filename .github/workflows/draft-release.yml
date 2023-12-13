@@ -49,6 +49,9 @@ jobs:
         with:
           path: ${{ env.asset-path }}
 
+      - name: List directory
+        run: ls -R "${{ steps.build-files.outputs.download-path }}"
+
       - name: Assign asset filenames
         run: |
           git_hash=$(git rev-parse --short HEAD)

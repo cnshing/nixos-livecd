@@ -31,6 +31,7 @@ jobs:
     with:
       configuration: configuration.nix
       format: ${{ matrix.formats }}
+      commitish: ${{ inputs.commitish }}
   draft_release:
     needs: build_release
     if: always()
@@ -39,6 +40,8 @@ jobs:
       asset-path: ./assets
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.commitish }}
 
       - name: Retrieve the build files
         uses: actions/download-artifact@v3

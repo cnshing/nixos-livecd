@@ -53,11 +53,11 @@ jobs:
         run: |
           git_hash=$(git rev-parse --short HEAD)
           cd "${{ steps.build-files.outputs.download-path }}"
-          for file in "${{ steps.build-files.outputs.download-path }}"/*; do
-            filename=$(basename "$file")
-            release=${filename/$git_hash/${{ inputs.tag }}}
-            mv -v "$filename" "$release"
-          done
+          find ${{ steps.build-files.outputs.download-path }} -exec bash -c '
+              filename=$(basename "$0")
+              release=${filename/$git_hash/${{ inputs.tag }}}
+              mv -v "$filename" "$release"
+          ' {} \;
 
       - name: List directory
         run: ls -R "${{ steps.build-files.outputs.download-path }}"

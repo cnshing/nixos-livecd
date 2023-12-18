@@ -80,6 +80,10 @@ There are some instances with GTK File Picker where it is hard coded such that o
 
 [NetworkManager](https://networkmanager.dev/) is sufficient for Internet with ease of use and GNOME integration. 
 
+### VPN
+
+VPNs should be supported via [GNOME](#desktop-environment) with as many VPN plugins and/or VPN format compatibilities as reasonably possible. 
+
 ## Mail Client
 
 Each mail service should be accompanied by corresponding web-app based client. In practice, these web-app implementations are often based off Electron.

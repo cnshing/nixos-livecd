@@ -20,6 +20,18 @@ Ideally, there should be an application that automatically applies an [AutoEQ](h
 
 If possible, there should be a separate boot entry from the standard one that explicitly enables screen rendering from a dedicated GPU, allowing the user to choose which use-case is most appropriate for their battery and performance needs.
 
+## Browser
+
+There will be [Firefox](https://www.mozilla.org/en-US/firefox/browsers/), [Google Chrome](https://www.google.com/chrome/), and [Ungoogled Chromium](https://ungoogled-software.github.io/) all of whom will share the same extensions listed below.
+
+### Password Management
+
+Both [Bitwarden](https://bitwarden.com/) and [Proton Pass](https://proton.me/pass) will be installed by default for password management.
+
+### Ad blocking
+
+[UBlock Origin](https://ublockorigin.com/) will be installed by default for ad blocking.
+
 ## Display Manager
 
 [LighDM](https://github.com/canonical/lightdm) will be the display manager using the default GTK [theme](#theming).

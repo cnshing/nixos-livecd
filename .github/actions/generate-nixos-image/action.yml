@@ -75,9 +75,9 @@ runs:
         # Github Inputs are inaccessible for nested composite actions, use github_env as a workaround instead
         # See https://github.com/actions/runner/issues/2009
         if [[ -z "${{inputs.flake}}" ]]; then
-          image_path=$(nixos-generate -f ${{ inputs.format }} --flake "${{ inputs.flake }}")
-        else
           image_path=$(nixos-generate -f ${{ inputs.format }} -c ${{ inputs.configuration }})
+        else
+          image_path=$(nixos-generate -f ${{ inputs.format }} --flake "${{ inputs.flake }}")
         fi
         echo "image-path=$image_path" >> $GITHUB_ENV
       shell: bash    

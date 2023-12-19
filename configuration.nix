@@ -4,6 +4,7 @@
   pkgs,
   ...
 }: {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.sshd.enable = true;
   services.nginx.enable = true;
 

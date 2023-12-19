@@ -39,6 +39,6 @@ jobs:
         formats: [install-iso, virtualbox, proxmox-lxc, proxmox, linode, gce, docker, do]
     uses: ./.github/workflows/build-livecd.yml
     with:
-      configuration: configuration.nix
+      flake: ./#nixos-livecd
       format: ${{ matrix.formats }}
 

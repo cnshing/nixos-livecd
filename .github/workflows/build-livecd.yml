@@ -1,4 +1,4 @@
-run-name: Build a ${{ inputs.format }} livecd with ${{ inputs.configuration }}
+run-name: Build a ${{ inputs.format }} livecd with ${{ inputs.configuration || inputs.flake }}
 
 on:
   workflow_call:

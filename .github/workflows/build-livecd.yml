@@ -11,7 +11,6 @@ on:
         description: 'The path or filename of the nix configuration describing the image'
         type: string
         required: false
-        default: 'configuration.nix'
       format:
         description: 'The nixOS image format'
         required: true
@@ -34,7 +33,6 @@ on:
         description: 'The path or filename of the nix configuration describing the image'
         type: string
         required: true
-        default: 'configuration.nix'
       format:
         description: 'The nixOS image format'
         required: true

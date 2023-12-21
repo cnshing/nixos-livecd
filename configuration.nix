@@ -6,6 +6,12 @@
 }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   imports = [ ./modules ];
+
+  home.username = "nixos-livecd";
+  home.homeDirectory = "/home/${home.username}";
+  home.stateVersion = lib.mkDefault nixpkgs.config.stateVersion;
+  programs.home-manager.enable = true;
+
   services.sshd.enable = true;
   services.nginx.enable = true;
 

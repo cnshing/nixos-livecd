@@ -28,7 +28,7 @@ in
   options.modules.excludes = mkOption {
     type = types.list types.str;
     description = "A list of paths that should not be imported";
-  }
+  };
 
   imports = validFiles ./.;
 

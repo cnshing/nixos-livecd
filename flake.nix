@@ -12,7 +12,7 @@
     };
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       nixos-livecd = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

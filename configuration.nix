@@ -8,7 +8,7 @@
   imports = [ ./modules ];
 
   home.username = "nixos-livecd";
-  home.homeDirectory = "/home/${home.username}";
+  home.homeDirectory = "/home/nixos-livecd";
   home.stateVersion = lib.mkDefault pkgs.config.stateVersion;
   programs.home-manager.enable = true;
 

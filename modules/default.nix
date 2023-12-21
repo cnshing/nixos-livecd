@@ -8,7 +8,8 @@ let
   # Recursively constructs an attrset of a given folder, recursing on directories, value of attrs is the filetype
   getDir = dir: mapAttrs
     (file: type:
-      if type == "directory" then getDir "${dir}/${file}" else type
+    # Implement implicit copy fix from https://discourse.nixos.org/t/understanding-the-import-system-in-nixos/24367/4
+      if type == "directory" then getDir (dir + "/${file}") else type
     )
     (builtins.readDir dir);
 

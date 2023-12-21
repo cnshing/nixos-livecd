@@ -5,7 +5,7 @@
   ...
 }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  imports = [ "./modules" ]
+  imports = [ "./modules" ];
   services.sshd.enable = true;
   services.nginx.enable = true;
 

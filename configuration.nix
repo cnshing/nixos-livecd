@@ -12,6 +12,8 @@
 
   disabledModules = [];
 
+  config.user.name = "nixos-livecd"
+
   services.sshd.enable = true;
   services.nginx.enable = true;
 

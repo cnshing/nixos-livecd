@@ -6,9 +6,9 @@ with lib;
 let cfg = config.home;
 in
 {
-   imports = with inputs; [
-     home-manager.nixosModules.home-manager
-   ];
+  # imports = with inputs; [
+  #   home-manager.nixosModules.home-manager
+  # ];
 
   options.home = with types; {
     file = mkOpt attrs { }

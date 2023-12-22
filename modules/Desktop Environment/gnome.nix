@@ -3,11 +3,13 @@
   # See https://nixos.wiki/wiki/Sway#Using_Home_Manager
   security.polkit.enable = true;
 
-  wayland.windowManager.sway = {
-    enable = true;
-  };
+  config.home = {
+    wayland.windowManager.sway = {
+      enable = true;
+    };
 
-  services.swayidle.enable = true;
+    services.swayidle.enable = true;
+  }
 
   services.xserver = {
     enable = true;

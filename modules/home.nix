@@ -3,12 +3,21 @@
 { options, config, pkgs, lib, inputs, ... }:
 
 with lib;
-let cfg = config.home;
+let
+
+  # Copy source material import code - required for options.home
+  # From https://github.com/jakehamilton/config/blob/dacffe212ebe6c7c42181e4cc42733d1233ec5d2/lib/module/default.nix#L7
+  # If mkOpt will be used more in the future then move this to a dedicated module
+  mkOpt = type: default: description:
+    mkOption { inherit type default description; };
+
+  cfg = config.home;
 in
 {
   # imports = with inputs; [
   #   home-manager.nixosModules.home-manager
   # ];
+
 
   options.home = with types; {
     file = mkOpt attrs { }

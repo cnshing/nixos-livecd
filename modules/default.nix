@@ -20,17 +20,10 @@ let
   validFiles = dir: map
     (file: ./. + "/${file}")
     (filter
-      (file: hasSuffix ".nix" file && file != "default.nix" 
-      && ! (elem file config.modules.excludes))
+      (file: hasSuffix ".nix" file && file != "default.nix")
       (files dir));
 
 in
 {
-  options.modules.excludes = mkOption {
-    type = types.list types.str;
-    description = "A list of paths that should not be imported";
-  };
-
   imports = validFiles ./.;
-
 }

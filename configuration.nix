@@ -6,6 +6,7 @@
 }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   imports = [ ./modules ];
+  disabledModules = [];
 
   home.username = "nixos-livecd";
   home.homeDirectory = "/home/nixos-livecd";

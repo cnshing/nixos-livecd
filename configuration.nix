@@ -7,7 +7,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   imports = [ 
     ./modules 
-    home-manager.nixosModules.home-manager   
   ];
 
   disabledModules = [];

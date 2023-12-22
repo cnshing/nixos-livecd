@@ -14,7 +14,7 @@
 
     displayManager.lightdm = {
       enable = true;
-      greeter = true;  
+      greeter.gtk.enable = true;  
       autoLogin.enable = true;
       autoLogin.user = "nixos-livecd";
     };

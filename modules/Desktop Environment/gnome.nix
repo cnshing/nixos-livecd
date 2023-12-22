@@ -3,7 +3,7 @@
   # See https://nixos.wiki/wiki/Sway#Using_Home_Manager
   security.polkit.enable = true;
 
-  home = {
+  home.extraOptions = {
     wayland.windowManager.sway = {
       enable = true;
     };

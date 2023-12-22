@@ -9,7 +9,7 @@
     };
 
     services.swayidle.enable = true;
-  }
+  };
 
   services.xserver = {
     enable = true;

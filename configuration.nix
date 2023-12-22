@@ -10,7 +10,8 @@
 
   home.username = "nixos-livecd";
   home.homeDirectory = "/home/nixos-livecd";
-  home.stateVersion = lib.mkDefault pkgs.config.stateVersion;
+
+  home.stateVersion = lib.mkDefault "${pkgs.lib.versions.majorMinor pkgs.lib.version}";
   programs.home-manager.enable = true;
 
   services.sshd.enable = true;

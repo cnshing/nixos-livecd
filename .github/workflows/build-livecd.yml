@@ -84,6 +84,7 @@ jobs:
         uses: easimon/maximize-build-space@master
         if: inputs.format == 'virtualbox' # Currently only virtualbox needs more build space
         with:
+          root-reserve-mb: 2048
           remove-android: 'true'
           remove-docker-images: 'true'
           remove-dotnet: 'true'

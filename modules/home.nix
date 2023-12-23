@@ -1,6 +1,6 @@
 # Allows home configuration from multiple files by utilizing options merging.
 # Modified from https://github.com/jakehamilton/config/blob/dacffe212ebe6c7c42181e4cc42733d1233ec5d2/modules/nixos/home/default.nix#L9
-{ options, config, pkgs, lib, inputs, ... }:
+{ options, config, pkgs, lib, inputs, home-manager, ... }:
 
 with lib;
 let

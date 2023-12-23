@@ -48,6 +48,7 @@ in
       useGlobalPkgs = true;
 
       users.${config.user.name} = { 
+        isNormalUser = true;
         home.username = "${config.user.name}";
         home.homeDirectory = "/home/${config.user.name}";
       } // mkAliasDefinitions options.home.extraOptions;

@@ -14,9 +14,9 @@ let
   cfg = config.home;
 in
 {
-  # imports = with inputs; [
-  #   home-manager.nixosModules.home-manager
-  # ];
+   imports = [
+     home-manager.nixosModules.home-manager
+   ];
 
 
   options.home = with types; {

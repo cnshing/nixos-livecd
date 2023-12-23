@@ -6,13 +6,14 @@
   ...
 }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  user.name = "nixos-livecd";
+
   imports = [ 
     ./modules 
   ];
 
   disabledModules = [];
 
-  user.name = "nixos-livecd";
 
   services.sshd.enable = true;
   services.nginx.enable = true;

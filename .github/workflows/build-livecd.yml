@@ -78,6 +78,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      # Hacky action that increases extra disk space for format builds that need it
+      # Can break at any time because it is highly dependent on github action's current virtual runner configuration
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        if: inputs.format == 'virtualbox' # Currently only virtualbox needs more build space
+        with:
+          remove-android: 'true'
+          remove-docker-images: 'true'
+          remove-dotnet: 'true'
+
       - uses: actions/checkout@v3
         with:
           ref: ${{ inputs.commitish }}

@@ -36,13 +36,12 @@ in
 
   config = {
     home.extraOptions = {
+      programs.home-manager.enable = true;
       home.stateVersion = lib.mkDefault "${pkgs.lib.versions.majorMinor pkgs.lib.version}";
       home.file = mkAliasDefinitions options.home.file;
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.home.configFile;
     };
-
-    programs.home-manager.enable = true;
 
     home-manager = {
       useUserPackages = true;

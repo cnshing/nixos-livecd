@@ -25,7 +25,7 @@
     extraGroups = ["wheels"];
     password = "root";
   };
-,
+
   services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
   services.getty.autologinUser = lib.mkDefault "root";
 }

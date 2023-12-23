@@ -25,7 +25,7 @@
   users.users.nixos-livecd = {
     isNormalUser = true;
     group = "users";
-    extraGroup = ["wheels"];
+    extraGroups = ["wheels"];
     password = "root";
   };
   services.openssh.settings.PermitRootLogin = lib.mkForce "yes";

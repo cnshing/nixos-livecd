@@ -103,7 +103,6 @@ The app should "just work", with no artificial barrier of access other than stan
 > [!WARNING]\
 > :warning: This process of automatically exposing unattended access to a network is essentially a backdoor. Do not attempt to set a known and public Rustdesk password!
 
-
 ## Terminal
 
 [Sakura](https://github.com/dabisu/sakura) will used with [scollbar enabled](settings.md#terminal). 

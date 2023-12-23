@@ -24,7 +24,7 @@
   networking.networkmanager.unmanaged = [
     "*" "except:type:wwan" "except:type:gsm"
   ];
-  networking.useDHCP = lib.mkDefault true;
+  networking.useDHCP = lib.mkForce true;
   networking.firewall.allowedTCPPorts = [80];
 
   users.users.root.password = "nixos";

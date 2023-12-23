@@ -1,4 +1,7 @@
 # Everything required to get network manager working
+
+{ lib, ... }:
+
 { 
   networking = {
     networkmanager.enable = true;

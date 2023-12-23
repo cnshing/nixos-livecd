@@ -27,6 +27,13 @@ in
     extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
   };
 
+  options.user.name = mkOption {
+    type = with types; uniq str;
+    description = "
+      The home username for home-manager.
+    ";
+  };
+
   config = {
     home.extraOptions = {
       home.stateVersion = lib.mkDefault "${pkgs.lib.versions.majorMinor pkgs.lib.version}";

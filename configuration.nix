@@ -18,7 +18,7 @@
   services.sshd.enable = true;
   services.nginx.enable = true;
 
-  networking.useDHCP = mkDefault true;
+  networking.useDHCP = lib.mkDefault true;
   networking.firewall.allowedTCPPorts = [80];
 
   users.users.root.password = "nixos";

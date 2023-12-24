@@ -37,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        formats: [install-iso, virtualbox, proxmox-lxc, proxmox, linode, gce, docker, do]
+        formats: [install-iso, virtualbox, proxmox-lxc, proxmox, linode, gce, do]
     uses: ./.github/workflows/build-livecd.yml
     with:
       flake: ./#nixos-livecd

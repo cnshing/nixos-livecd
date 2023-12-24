@@ -1,5 +1,5 @@
 # Technical hotfixes not belonging to any specific livecd feature/requirement 
-{ lib, boot, ... }:
+{ configs, lib, boot, ... }:
 {
     # Fixes missing cairo-lib dependency for docker builds only
     # See https://github.com/NixOS/nixpkgs/issues/119841

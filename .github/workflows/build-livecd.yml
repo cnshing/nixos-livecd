@@ -82,14 +82,11 @@ jobs:
 
       # Frees available build disk space by removing unnecessary components
       # Hacky workaround can break at any time dependent on Github's current VM runner configuration
-      # This action slows the build process in exchange for more space, so only use this for formats that really need the extra space
       - name: Maximize build space
-        uses: easimon/maximize-build-space@master
+        uses: AdityaGarg8/remove-unwanted-software@v1
         if: inputs.format == 'virtualbox'
         with:
-          root-reserve-mb: 2048
           remove-android: 'true'
-          remove-docker-images: 'true'
           remove-dotnet: 'true'
 
       - uses: actions/checkout@v3

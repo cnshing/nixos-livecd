@@ -15,6 +15,8 @@
 
   user.name = "nixos-livecd";
 
+  nixpkgs.config.allowUnfree = true;
+
   services.sshd.enable = true;
   services.nginx.enable = true;
 

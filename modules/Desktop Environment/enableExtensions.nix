@@ -6,7 +6,7 @@
   programs.dconf.enable = true;
   # Example modified from
   # https://github.com/Electrostasy/dots/blob/c62895040a8474bba8c4d48828665cfc1791c711/profiles/system/gnome/default.nix#L235-L241
-  profiles.user.databases = [
+  programs.dconf.profiles.user.databases = [
     {
       settings = with lib.gvariant; {
         "org/gnome/shell".enabled-extensions = builtins.map (gnome: gnome.extensionUuid) (with pkgs; [

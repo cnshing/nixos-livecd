@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [gnomeExtensions.gsconnect];
+  programs.dconf.enable = true;
   profiles.${config.user.names}.databases = [
     {
       settings = {

@@ -1,7 +1,6 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [gnomeExtensions.gsconnect];
   programs.dconf.enable = true;
-  profiles.${config.user.names}.databases = [
+  profiles.${config.user.name}.databases = [
     {
       settings = {
         "org/gnome/shell".enabled-extensions = builtins.map (gnome: gnome.extensionUuid) (with pkgs; [

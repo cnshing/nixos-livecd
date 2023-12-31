@@ -24,4 +24,9 @@
     displayManager.defaultSession = "gnome";
     desktopManager.gnome.enable = true; 
   };
+
+  services.gnome = {
+    core-utilities.enable = false;
+    games.enable = false;
+  };
 }

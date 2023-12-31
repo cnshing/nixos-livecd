@@ -1,5 +1,6 @@
 {pkgs, ...}: 
 {
+  environment.systemPackages = [ pkgs.gnome.gnome-tweaks ];
   fonts.packages = with pkgs; [
     inter
     ( nerdfonts.override { fonts = ["Arimo"]; } ) # Zorin's default Sans font

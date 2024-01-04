@@ -83,11 +83,13 @@ jobs:
       # Frees available build disk space by removing unnecessary components
       # Hacky workaround can break at any time dependent on Github's current VM runner configuration
       - name: Maximize build space
-        uses: AdityaGarg8/remove-unwanted-software@v1
+        uses: cnshing/remove-unwanted-software-feature-codeql-docker-support@master
         if: inputs.format == 'virtualbox'
         with:
           remove-android: 'true'
           remove-dotnet: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'
 
       - uses: actions/checkout@v3
         with:

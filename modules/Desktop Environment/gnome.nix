@@ -13,16 +13,8 @@
 
   services.xserver = {
     enable = true;
-
-    displayManager.lightdm = {
-      enable = true;
-      greeters.gtk.enable = true;  
-      autoLogin.enable = true;
-      autoLogin.user = "nixos-livecd";
-    };
-    
     displayManager.defaultSession = "gnome";
-    desktopManager.gnome.enable = true; 
+    desktopManager.gnome.enable = true;
   };
 
   services.gnome = {

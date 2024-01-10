@@ -1,7 +1,7 @@
 {
   programs.chromium = {
     extensions = [
-      cjpalhdlnbpafiamejdnhcphjbkeiagm
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm"
     ];
   };
   programs.firefox = {

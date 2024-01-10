@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ pkgs, lib, ... }: 
 {
   environment.systemPackages = with pkgs; [xfce.mousepad];
   home.extraOptions = with lib.hm.gvariant; {

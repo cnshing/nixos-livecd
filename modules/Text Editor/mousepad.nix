@@ -5,6 +5,7 @@
 }: {
   environment.systemPackages = with pkgs; [xfce.mousepad];
 
+  /*
   programs.dconf.profiles.user.databases = [
     {
       settings = with lib.gvariant; {
@@ -101,4 +102,5 @@
       };
     }
   ];
+  */
 }

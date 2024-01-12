@@ -3,7 +3,7 @@
     firefox
     google-chrome
     chromium
-    (lib.attrValues hunspellDictsChromium)
+    (lib.filterAttrs (name: value: value.type == "package") (lib.attrValues hunspellDictsChromium))
   ];
   programs.firefox.enable = true;
   programs.chromium.enable = true;

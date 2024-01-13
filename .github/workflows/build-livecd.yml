@@ -83,8 +83,8 @@ jobs:
       # Frees available build disk space by removing unnecessary components
       # Hacky workaround can break at any time dependent on Github's current VM runner configuration
       - name: Maximize build space
-        uses: cnshing/remove-unwanted-software-feature-codeql-docker-support@master
-        if: inputs.format == 'virtualbox'
+        uses: AdityaGarg8/remove-unwanted-software@master
+        if: contains(fromJson('["virtualbox", "proxmox", "linode", "gce", "do"]'), inputs.format)
         with:
           remove-android: 'true'
           remove-dotnet: 'true'

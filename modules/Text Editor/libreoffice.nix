@@ -4,7 +4,11 @@
   ...
 }:
 with lib; let
-  allHunspellDicts = attrValues (filterAttrs (name: value: types.isType types.package value) pkgs.hunspellDicts);
+  allHunspellDicts = attrValues (
+    filterAttrs 
+      (name: value: types.isType types.package value)
+      pkgs.hunspellDicts
+  );
 in {
   environment.systemPackages = with pkgs;
     [

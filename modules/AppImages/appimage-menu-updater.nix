@@ -1,4 +1,5 @@
 # MIT
+
 # # Using it:
 #
 # let
@@ -17,11 +18,13 @@
 #     wantedBy = [ "default.target" ];
 #   };
 # }
+
 {
   writeShellScript,
   inotify-tools,
-  p7zip,
+  p7zip
 }:
+
 writeShellScript "appimage-menu-updater.sh"
 ''
   shopt -s nullglob

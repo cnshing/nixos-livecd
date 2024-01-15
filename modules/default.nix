@@ -18,12 +18,12 @@ with lib; let
   files = dir: collect isString (mapAttrsRecursive (path: type: concatStringsSep "/" path) (getDir dir));
 
   # Filters out directories that don't end with .nix or are this file, also makes the strings absolute
-  validFiles = dir:
+  validFiles = dir: disabledModules:
     map
     (file: ./. + "/${file}")
     (filter
       (file: hasSuffix ".nix" file && file != "default.nix" && builtins.any (module: builtins.typeOf module == "string" && builtins.match file module) disabledModules)
       (files dir));
 in {
-  imports = validFiles ./.;
+  imports = validFiles ./. disabledModules;
 }

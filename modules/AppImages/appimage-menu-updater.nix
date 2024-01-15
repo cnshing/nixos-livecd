@@ -21,7 +21,6 @@
   writeShellScript,
   inotify-tools,
   p7zip,
-  ...
 }:
 writeShellScript "appimage-menu-updater.sh" ''
   shopt -s nullglob

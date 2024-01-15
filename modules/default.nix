@@ -22,7 +22,7 @@ with lib; let
     map
     (file: ./. + "/${file}")
     (filter
-      (file: hasSuffix ".nix" file && file != "default.nix" && !isDerivation (import ./. + "/${file}"))
+      (file: hasSuffix ".nix" file && file != "default.nix" && !isDerivation (import ./. + "/${file}" {}))
       (files dir));
 in {
   imports = validFiles ./.;

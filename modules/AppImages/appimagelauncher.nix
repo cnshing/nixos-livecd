@@ -8,7 +8,10 @@ with pkgs; let
   appimage-menu-updater = callPackage ./appimage-menu-updater.nix {};
 in {
   environment.systemPackages = [appimagelauncher];
-  disabledModules = [builtins.toString ./appimage-menu-updater.nix];
+  disabledModules = [
+    ./appimage-menu-updater.nix
+    ./appimagelauncher-deb.nix
+  ];
 
   systemd.user.services = {
     appimage-launcherd = {

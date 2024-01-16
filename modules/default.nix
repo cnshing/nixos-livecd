@@ -24,7 +24,7 @@ with lib; let
     map
     (file: ./. + "/${file}")
     (filter
-      (file: hasSuffix ".nix" file && file != "default.nix" && !builtins.any (module: builtins.match file module) excludedModules)
+      (file: hasSuffix ".nix" file && file != "default.nix" && !builtins.any (module: hasInfix module file) excludedModules)
       (files dir));
 in {
   imports = validFiles ./.;

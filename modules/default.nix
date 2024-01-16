@@ -17,12 +17,14 @@ with lib; let
   # Collects all files of a directory as a list of strings of paths
   files = dir: collect isString (mapAttrsRecursive (path: type: concatStringsSep "/" path) (getDir dir));
 
+  excludedModules = [ "appimage-menu-updater.nix" ]
+
   # Filters out directories that don't end with .nix or are this file, also makes the strings absolute
   validFiles = dir:
     map
     (file: ./. + "/${file}")
     (filter
-      (file: hasSuffix ".nix" file && file != "default.nix" && !isDerivation (import ./. + "/${file}" {}))
+      (file: hasSuffix ".nix" file && file != "default.nix" && !builtins.any (module: builtins.match file module) excludedModules)
       (files dir));
 in {
   imports = validFiles ./.;

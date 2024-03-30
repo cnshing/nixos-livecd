@@ -1,3 +1,7 @@
+# Archived repo
+
+This repo will be archived in favor of [debian-livecd](https://github.com/cnshing/debian-livecd). Please see the repo for more information. 
+
 # nixos-livecd
 My personalized build of nixOS
 
